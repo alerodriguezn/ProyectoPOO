@@ -1,3 +1,7 @@
+
+/**
+ * Describe los datos del Usuario Cordinador o Profesor
+ */
 public class Usuario {
 
     private String nombre;
@@ -25,7 +29,6 @@ public class Usuario {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 
     public String getTelefonos(byte pos) {
         return telefonos[pos];

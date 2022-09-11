@@ -14,6 +14,8 @@ public class TramitesEstudiantiles {
 
     }
 
+    
+
 
     public Estudiante getEstudiante() {
         return estudiante;

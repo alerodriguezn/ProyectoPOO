@@ -1,5 +1,9 @@
 import java.util.Date;
 
+
+/**
+ * Describe los datos del Estudiante
+ */
 public class Estudiante {
 
     private String nombreCompleto;
