@@ -1,6 +1,6 @@
 # Notas
 
-## Usuario Cordinador
+## Usuario Coordinador
 
 ### Funciones:
 + Crear nuevos usuarios
