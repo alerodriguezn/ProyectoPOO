@@ -2,16 +2,42 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Principal {
+
+
+    public static void limpiarConsola(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     /**
      * Funcion que imprime las multiples opciones para Iniciar Sesion
      */
     public static void menuInicioSesion(){
-
+        limpiarConsola();
         System.out.println(" ==========================================");
         System.out.println(" ============ INICIO DE SESION ============\n");
         System.out.println(" ==== 1. Iniciar sesion como Profesor =====");
         System.out.println(" ==== 2. Iniciar sesion como Coordinador ==\n");
-        System.out.println(" ==========================================");       
+        System.out.println(" =========================================="); 
+        
+        
+    }
+
+    public static void menuCoordinador(){
+        limpiarConsola();
+        System.out.println("--------------------------------------------------");
+        System.out.println("|                Menu Coordinador                |");
+        System.out.println("|    [1]. Crear Nuevo Usuario                    |");
+        System.out.println("|    [2]. Registrar Estudiante                   |");
+        System.out.println("|    [3]. Actualizar Estudiante                  |");
+        System.out.println("|    [4]. Registrar Nuevo Curso                  |");
+        System.out.println("|    [5]. Editar Curso                           |");
+        System.out.println("|    [6]. Crear Nuevo Grupo                      |");
+        System.out.println("|    [7]. Editar Grupo                           |");
+        System.out.println("|    [8]. Matricula-Asociacion Estudiante/Curso  |");
+        System.out.println("|    [9]. Registro de Tramites Estudiantiles     |");
+        System.out.println("|    [S]. Atras                                  |");
+        System.out.println("--------------------------------------------------");
     }
 
     /**
@@ -60,7 +86,12 @@ public class Principal {
         String usuarioPrueba = "leo";
         String passwordPrueba = "leo123";
 
+        // ============================= PRUEBAS ==============================
+
         validarUsuarioContrasena(usuarioPrueba, passwordPrueba, listaUsuarios);
+
+        menuCoordinador();
+
 
         
     }
