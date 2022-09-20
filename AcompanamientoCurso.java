@@ -5,10 +5,10 @@ import java.util.Date;
  */
 public abstract class AcompanamientoCurso {
     
-    private Date fecha;
-    private String tipo;
-    private Estudiante estudiante;
-    private String notaDescriptiva;
+    protected Date fecha;
+    protected String tipo;
+    protected Estudiante estudiante;
+    protected String notaDescriptiva;
 
     public AcompanamientoCurso(Date fecha, String tipo, Estudiante estudiante, String notaDescriptiva){
         this.fecha = fecha;

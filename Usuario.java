@@ -2,23 +2,24 @@
 /**
  * Describe los datos del Usuario Cordinador o Profesor
  */
-public class Usuario {
+public abstract class Usuario {
 
-    private String nombre;
-    private String[] telefonos;  
-    private String correo;
-    private String usuario;
-    private String contrasena;
+    protected String nombre;
+    protected String[] telefonos;  
+    protected String correo;
+    protected String usuario;
+    protected String contrasena;
+    protected char perfil;
 
 
-    public Usuario(String nombre,String telefono, String correo, String usuario, String contrasena ){
+    public Usuario(String nombre,String telefono, String correo, String usuario, String contrasena, char perfil){
         this.nombre = nombre;
         this.telefonos= new String[3];
         this.telefonos[0]=telefono;
         this.correo = correo;
         this.usuario = usuario;
         this.contrasena = contrasena;
-
+        this.perfil = perfil;
     }
 
 
