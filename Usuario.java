@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Describe los datos del Usuario Cordinador o Profesor
@@ -9,10 +10,9 @@ public abstract class Usuario {
     protected String correo;
     protected String usuario;
     protected String contrasena;
-    protected char perfil;
+    protected boolean perfil;
 
-
-    public Usuario(String nombre,String telefono, String correo, String usuario, String contrasena, char perfil){
+    public Usuario(String nombre,String telefono, String correo, String usuario, String contrasena, Boolean perfil){
         this.nombre = nombre;
         this.telefonos= new String[3];
         this.telefonos[0]=telefono;
@@ -61,5 +61,16 @@ public abstract class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+    public Boolean getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(boolean perfil) {
+        this.perfil = perfil;
+    }
+
+
+
     
 }

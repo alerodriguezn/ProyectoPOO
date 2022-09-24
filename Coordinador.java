@@ -1,12 +1,15 @@
 import java.util.Scanner;
+import java.util.Date;
 
 public class Coordinador extends Usuario{
     
     public Coordinador(String nombre,String telefono, String correo, String usuario, String contrasena){
         
-        super(nombre, telefono, correo, usuario, contrasena,'c');
+        super(nombre, telefono, correo, usuario, contrasena, true);
 
     }
+    //Esto lo hago de momento para agregar el usuario al array que esta en principal
+    Principal p = new Principal();
 
     /*
      * Funcion que crea un nuevo usuario
@@ -29,15 +32,15 @@ public class Coordinador extends Usuario{
         char perfil = in.nextLine().charAt(0);
 
         
-        Principal p = new Principal(); //Esto lo hago de momento para agregar el usuario al array que esta en principal
+         
         
         if(perfil == 'c'){
             Coordinador nuevoUsuario = new Coordinador(nombre, telefono, correo, usuario, contrasena);
-            p.listaUsuarios.add(nuevoUsuario); //Se añade a la lista de usuarios que esta en principal
+            p.listaCoordinadores.add(nuevoUsuario); //Se añade a la lista de usuarios que esta en principal
         }
         else if (perfil == 'p'){
             Profesor nuevoUsuario = new Profesor(nombre, telefono, correo, usuario, contrasena);
-            p.listaUsuarios.add(nuevoUsuario); //Se añade a la lista de usuarios que esta en principal
+            p.listaProfesores.add(nuevoUsuario); //Se añade a la lista de usuarios que esta en principal
         }
         
     }
@@ -45,9 +48,9 @@ public class Coordinador extends Usuario{
     /*
      * Funcion que registra un nuevo estudiante
      */
-    public void registrarEstudiante()
-    {
-        System.out.println("Funcion");
+    public void registrarEstudiante(String nombreCompleto, int carnet, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia)
+    {        
+        p.listaEstudiantes.add(new Estudiante(nombreCompleto, carnet, fechaNacimiento, edad, genero, lugarProcedencia));
     }
 
     /*

@@ -2,7 +2,7 @@ public class Profesor extends Usuario{
     
     public Profesor(String nombre,String telefono, String correo, String usuario, String contrasena){
         
-        super(nombre, telefono, correo, usuario, contrasena,'p');
+        super(nombre, telefono, correo, usuario, contrasena, false);
 
     }
 
