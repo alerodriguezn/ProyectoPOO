@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -12,6 +13,8 @@ public class Estudiante {
     private byte edad;
     private String genero;
     private String lugarProcedencia;
+    private ArrayList<Calificacion> calificaciones;
+    private ArrayList<Grupo> listaGrupos;
 
     public Estudiante(String nombreCompleto, int carnet, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia){
 
@@ -21,6 +24,8 @@ public class Estudiante {
         this.edad = edad;
         this.genero = genero;
         this.lugarProcedencia = lugarProcedencia;
+        this.calificaciones = new ArrayList<Calificacion>();
+        this.listaGrupos = new ArrayList<Grupo>();
         
     }
 
@@ -72,6 +77,23 @@ public class Estudiante {
     public void setLugarProcedencia(String lugarProcedencia) {
         this.lugarProcedencia = lugarProcedencia;
     }
+
+    public ArrayList<Calificacion> getCalificaciones() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(float nota, Grupo grupo) {
+        this.calificaciones.add(new Calificacion(this, nota, grupo));
+    }
+
+    public ArrayList<Grupo> getListaGrupos() {
+        return listaGrupos;
+    }
+
+    public void setListaGrupos(Grupo grupo) {
+        this.listaGrupos.add(grupo);
+    }
+
 
     
 }

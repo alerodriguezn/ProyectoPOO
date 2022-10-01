@@ -6,17 +6,19 @@ import java.util.Date;
 public class Grupo {
     
     private String horario;
-    private String profesor;
+    private Profesor profesor;
     private byte numeroGrupo;
     private Date fechaInicio;
     private Date fechaFinalizacion;
+    private Curso curso;
 
-    public Grupo(String horario, String profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion){
+    public Grupo(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso){
         this.horario = horario;
         this.profesor = profesor;
         this.numeroGrupo = numeroGrupo;
         this.fechaInicio = (Date)fechaInicio.clone();
         this.fechaFinalizacion = (Date)fechaFinalizacion.clone();
+        this.curso = curso;
     }
 
     // Declaro los getters y setters
@@ -28,11 +30,11 @@ public class Grupo {
         this.horario = horario;
     }
 
-    public String getProfesor() {
+    public Profesor getProfesor() {
         return profesor;
     }
 
-    public void setProfesor(String profesor) {
+    public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
     public byte getNumeroGrupo() {
@@ -57,5 +59,13 @@ public class Grupo {
 
     public void setFechaFinalizacion(Date fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 }

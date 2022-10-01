@@ -10,9 +10,9 @@ public class Profesor extends Usuario{
     /*
      * Funcion que registra una calificacion
      */
-    public void registrarCalificacion()
+    public void registrarCalificacion(Estudiante estudiante, Grupo grupo,float nota)
     {
-        System.out.println("Funcion");
+        estudiante.setCalificaciones(nota, grupo);
     }
 
     /*

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 /**
  * Describe los datos del Usuario Cordinador o Profesor

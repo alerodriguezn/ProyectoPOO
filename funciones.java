@@ -92,7 +92,7 @@ public class funciones {
                 return datosCorrectos;
             }
         }
-        System.out.println("Datos Incorrectos");
+        System.out.println("Datos Incorrectos");  
         return datosCorrectos;
     }
     
@@ -119,6 +119,18 @@ public class funciones {
             
         }
         System.out.println("=======================");
+
+    }
+
+
+    public Estudiante buscarEstudiantePorCarnet(int carnet, ArrayList<Estudiante> lista){
+        for (Estudiante e : lista) {
+            if(carnet == e.getCarnet()){
+                return e;
+            }
+        }
+
+        return null;
 
     }
 
