@@ -3,12 +3,12 @@ import java.util.Date;
 /**
  * Describe los datos de acompañamiento de cursos
  */
-public abstract class AcompanamientoCurso {
+public class AcompanamientoCurso {
     
-    protected Date fecha;
-    protected String tipo;
-    protected Estudiante estudiante;
-    protected String notaDescriptiva;
+    private Date fecha;
+    private String tipo;
+    private Estudiante estudiante;
+    private String notaDescriptiva;
 
     public AcompanamientoCurso(Date fecha, String tipo, Estudiante estudiante, String notaDescriptiva){
         this.fecha = fecha;
@@ -51,25 +51,4 @@ public abstract class AcompanamientoCurso {
         this.notaDescriptiva = notaDescriptiva;
     }
 
-}
-
-
-class AdecuacionDeEvaluaciones extends AcompanamientoCurso{
-
-    public AdecuacionDeEvaluaciones(Date fecha, String tipo, Estudiante estudiante, String notaDescriptiva){
-        super(fecha, tipo, estudiante, notaDescriptiva);
-    }
-    
-}
-
-class TiempoAdicionalEvualuaciones extends AcompanamientoCurso{
-    public TiempoAdicionalEvualuaciones(Date fecha, String tipo, Estudiante estudiante, String notaDescriptiva){
-        super(fecha, tipo, estudiante, notaDescriptiva);
-    }
-}
-
-class IncidenciaSignificativa extends AcompanamientoCurso{
-    public IncidenciaSignificativa(Date fecha, String tipo, Estudiante estudiante, String notaDescriptiva){
-        super(fecha, tipo, estudiante, notaDescriptiva);
-    }
 }

@@ -12,6 +12,7 @@ public abstract class Usuario {
     protected String contrasena;
     protected boolean perfil;
 
+    // Constructor
     public Usuario(String nombre,String telefono, String correo, String usuario, String contrasena, Boolean perfil){
         this.nombre = nombre;
         this.telefonos= new String[3];
@@ -20,6 +21,12 @@ public abstract class Usuario {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.perfil = perfil;
+    }
+
+    // Constructor para la herencia que tendrá el estudiante
+    public Usuario(String nombre, String correo){
+        this.nombre = nombre;
+        this.correo = correo;
     }
 
 
@@ -69,8 +76,5 @@ public abstract class Usuario {
     public void setPerfil(boolean perfil) {
         this.perfil = perfil;
     }
-
-
-
     
 }

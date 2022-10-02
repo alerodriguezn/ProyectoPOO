@@ -6,7 +6,6 @@ public class Profesor extends Usuario{
 
     }
 
-    
     /*
      * Funcion que registra una calificacion
      */

@@ -112,11 +112,15 @@ class SolicitudBeca extends TramitesEstudiantiles{
 
     private String periodoBeca;
     private String tipoBeca;
+    private Date fechaInicio;
+    private Date fechaFin;
 
-    public SolicitudBeca(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo, String periodoBeca, String tipoBeca){
+    public SolicitudBeca(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo, String periodoBeca, String tipoBeca, Date fechaInicio, Date fechaFin){
         super(estudiante,fechaRegistro,detalleDescriptivo);
         this.periodoBeca = periodoBeca;
         this.tipoBeca = tipoBeca;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
 
     }
 
@@ -131,5 +135,17 @@ class SolicitudBeca extends TramitesEstudiantiles{
     }
     public void setTipoBeca(String tipoBeca) {
         this.tipoBeca = tipoBeca;
+    }
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 }

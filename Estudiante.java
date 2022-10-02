@@ -1,42 +1,32 @@
 import java.util.ArrayList;
 import java.util.Date;
 
-
 /**
  * Describe los datos del Estudiante
  */
-public class Estudiante {
+public class Estudiante extends Usuario{
 
-    private String nombreCompleto;
     private int carnet;
     private Date fechaNacimiento;
     private byte edad;
     private String genero;
     private String lugarProcedencia;
     private ArrayList<Calificacion> calificaciones;
-    private ArrayList<Grupo> listaGrupos;
+    private ArrayList<Grupo> cursosMatriculados;
 
-    public Estudiante(String nombreCompleto, int carnet, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia){
+    public Estudiante(String nombreCompleto, int carnet, String correo, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia){
 
-        this.nombreCompleto = nombreCompleto;
+        super(nombreCompleto, correo);
         this.carnet = carnet;
         this.fechaNacimiento=(Date)fechaNacimiento.clone();
         this.edad = edad;
         this.genero = genero;
         this.lugarProcedencia = lugarProcedencia;
         this.calificaciones = new ArrayList<Calificacion>();
-        this.listaGrupos = new ArrayList<Grupo>();
+        this.cursosMatriculados = new ArrayList<Grupo>();
         
     }
-
-    public String getNombreCompleto() {
-        return nombreCompleto;
-    }
-
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
-
+    
     public int getCarnet() {
         return carnet;
     }
@@ -86,12 +76,12 @@ public class Estudiante {
         this.calificaciones.add(new Calificacion(this, nota, grupo));
     }
 
-    public ArrayList<Grupo> getListaGrupos() {
-        return listaGrupos;
+    public ArrayList<Grupo> getcursosMatriculados() {
+        return cursosMatriculados;
     }
 
-    public void setListaGrupos(Grupo grupo) {
-        this.listaGrupos.add(grupo);
+    public void setcursosMatriculados(Grupo grupo) {
+        this.cursosMatriculados.add(grupo);
     }
 
 

@@ -34,8 +34,8 @@ public class Principal {
         Profesor  us3 = new Profesor("Lorena", "8223-4134", "lorena@lorena.com", "lorena", "lore123");
 
         Coordinador us2 = new Coordinador("Admin", "2022-2202", "admin@admin.com", "admin", "123");
-        Estudiante es1 = new Estudiante("Alejandro", 2022230350, new Date(2002,11,19), (byte)19, "Masculino", "La Fortuna");
-        Estudiante es2 = new Estudiante("Deivid", 2022180126, new Date(2002,11,23), (byte)19, "Masculino", "Santa Clara");
+        Estudiante es1 = new Estudiante("Alejandro", 2022230350,"arnavarro@estudiantec.cr", new Date(2002,11,19), (byte)19, "Masculino","La Fortuna");
+        Estudiante es2 = new Estudiante("Deivid", 2022180126, "dematute@estudiantec.cr", new Date(2002,11,23), (byte)19, "Masculino","Santa Clara");
         
         Grupo g1 = new Grupo("L-7:00-11:30", us1, (byte)50, new Date(2022,06,10), new Date(2022,12,10), poo);
         Grupo g2 = new Grupo("M-12:30-16:00", us3, (byte)50, new Date(2022,06,10), new Date(2022,12,10), ed);
@@ -92,6 +92,8 @@ public class Principal {
                             String nombreC = in.nextLine();
                             System.out.print("Carnet: ");
                             String carnet = in.nextLine();
+                            System.out.print("Correo: ");
+                            String correo = in.nextLine();
                             System.out.print("Fecha Nacimiento(dd-mm-aa): ");
                             String fecha = in.nextLine();
                             System.out.print("Edad: ");
@@ -101,7 +103,7 @@ public class Principal {
                             System.out.print("Lugar de Procedencia: ");
                             String lugarProcedencia = in.nextLine();
 
-                            coordinadorLogeado.registrarEstudiante(nombreC, Integer.parseInt(carnet), new Date(f.obtenerFecha(fecha, "dia"),f.obtenerFecha(fecha, "mes"),f.obtenerFecha(fecha, "anio")), (byte) Integer.parseInt(edad), genero, lugarProcedencia);
+                            coordinadorLogeado.registrarEstudiante(nombreC, Integer.parseInt(carnet), correo, new Date(f.obtenerFecha(fecha, "dia"),f.obtenerFecha(fecha, "mes"),f.obtenerFecha(fecha, "anio")), (byte) Integer.parseInt(edad), genero, lugarProcedencia);
 
                             System.out.println("=== Estudiante Registrado Correctamente..... ===");
                             f.limpiarConsola();

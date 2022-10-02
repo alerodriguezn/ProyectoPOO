@@ -48,9 +48,9 @@ public class Coordinador extends Usuario{
     /*
      * Funcion que registra un nuevo estudiante
      */
-    public void registrarEstudiante(String nombreCompleto, int carnet, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia)
+    public void registrarEstudiante(String nombreCompleto, int carnet, String correo, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia)
     {        
-        p.listaEstudiantes.add(new Estudiante(nombreCompleto, carnet, fechaNacimiento, edad, genero, lugarProcedencia));
+        p.listaEstudiantes.add(new Estudiante(nombreCompleto, carnet, correo, fechaNacimiento, edad, genero, lugarProcedencia));
     }
 
     /*

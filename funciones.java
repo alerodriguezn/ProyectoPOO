@@ -115,7 +115,7 @@ public class funciones {
 
         for (Estudiante e : lista) {
 
-            System.out.println("- ".concat(e.getNombreCompleto()).concat("  ").concat(String.valueOf(e.getCarnet())));
+            System.out.println("- ".concat(e.getNombre()).concat("  ").concat(String.valueOf(e.getCarnet())));
             
         }
         System.out.println("=======================");

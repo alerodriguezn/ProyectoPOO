@@ -1,9 +1,9 @@
 public class Calificacion {
 
 
-    Estudiante estudiante;
-    float nota;
-    Grupo grupo;
+    private Estudiante estudiante;
+    private float nota;
+    private Grupo grupo;
 
     public Calificacion(Estudiante estudiante, float nota, Grupo grupo){
         this.estudiante = estudiante;
