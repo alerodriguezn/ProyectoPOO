@@ -62,4 +62,10 @@ public class Curso{
     public void agregarCorrequisito(Curso correquisito){
         correquisitos.add(correquisito);
     }
+
+    
+    public String toString() {
+        
+        return ("Nombre: "+this.getNombre()+ " | Codigo: "+ this.getCodigo()+" | Creditos: " + String.valueOf(this.getCreditos())+ " | Cantidad Horas Lectivas: " + String.valueOf(this.getCantidadHorasLectivas()) );
+    }
 }

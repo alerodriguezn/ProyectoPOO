@@ -26,6 +26,27 @@ public class Estudiante extends Usuario{
         this.cursosMatriculados = new ArrayList<Grupo>();
         
     }
+
+    @Override
+    public String getNombre() {
+        return super.getNombre();
+    }
+
+    @Override
+    public void setNombre(String nombre) {
+        super.setNombre(nombre);
+    }
+
+
+    @Override
+    public String getCorreo() {
+        return super.getCorreo();
+    }
+
+    @Override
+    public void setCorreo(String correo) {
+        super.setCorreo(correo);
+    }
     
     public int getCarnet() {
         return carnet;
@@ -82,6 +103,10 @@ public class Estudiante extends Usuario{
 
     public void setcursosMatriculados(Grupo grupo) {
         this.cursosMatriculados.add(grupo);
+    }
+
+    public String toString(){
+        return("Nombre: " + this.getNombre() + " | Correo: "+ this.getCorreo() + " | Carnet: "+ this.getCarnet() + " | Fecha Nacimiento: " + this.getFechaNacimiento().getYear())+"/"+this.getFechaNacimiento().getMonth()+"/"+this.getFechaNacimiento().getDay();
     }
 
 

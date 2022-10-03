@@ -112,14 +112,26 @@ public class funciones {
 
     public void imprimirListaEstudiantes(ArrayList<Estudiante> lista){
         System.out.println("=======================");
+        System.out.println("Lista de Estudiantes: ");
 
         for (Estudiante e : lista) {
 
-            System.out.println("- ".concat(e.getNombre()).concat("  ").concat(String.valueOf(e.getCarnet())));
+            System.out.println(e.toString());
             
         }
         System.out.println("=======================");
+    }
 
+    public void imprimirListaCursos(ArrayList<Curso> lista){
+        System.out.println("=======================");
+        System.out.println("Lista de Cursos: ");
+
+        for (Curso c : lista) {
+
+            System.out.println(c.toString());
+            
+        }
+        System.out.println("=======================");
     }
 
 
@@ -133,6 +145,17 @@ public class funciones {
         return null;
 
     }
+
+    public Curso buscarCursoPorCodigoCurso(String codigo,ArrayList<Curso> lista){
+        for (Curso c : lista) {
+            if(codigo.equals(c.getCodigo())){
+                return c;
+            }
+        }
+
+        return null;
+        
+    } 
 
 
 }

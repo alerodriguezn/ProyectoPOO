@@ -56,33 +56,44 @@ public class Coordinador extends Usuario{
     /*
      * Funcion que actualiza datos del estudiante
      */
-    public void actualizarEstudiante()
+    public void actualizarEstudiante(Estudiante e,String nombre, String correo, int carnet, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia)
     {
-        System.out.println("Funcion");
+        
+        e.setNombre(nombre);
+        e.setCorreo(correo);
+        e.setCarnet(carnet);
+        e.setFechaNacimiento(fechaNacimiento);
+        e.setEdad(edad);
+        e.setGenero(genero);
+        e.setLugarProcedencia(lugarProcedencia);
+        
     }
 
     /*
      * Funcion que ingresa un nuevo curso
      */
-    public void registrarCurso()
+    public void registrarCurso(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
     {
-        System.out.println("Funcion");
+        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas));
     }
 
     /*
      * Funcion que actualiza un curso
      */
-    public void actualizarCurso()
+    public void actualizarCurso(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
     {
-        System.out.println("Funcion");
+        c.setCodigo(codigo);
+        c.setNombre(nombre);
+        c.setCreditos(creditos);
+        c.setCantidadHorasLectivas(cantidadHorasLectivas);
     }
 
     /*
      * Funcion que crea un nuevo grupo
      */
-    public void registrarGrupo()
+    public void registrarGrupo(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso)
     {
-        System.out.println("Funcion");
+        p.listaGrupos.add(new Grupo(horario, profesor,numeroGrupo,fechaInicio,fechaFinalizacion, curso));
     }
 
     /*

@@ -8,6 +8,8 @@ public class Principal {
 
     // Listas
    
+    public static ArrayList<Curso> listaCursos = new ArrayList<Curso>();
+
     public static ArrayList<Coordinador> listaCoordinadores = new ArrayList<Coordinador>();
     public static ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();
     public static ArrayList<Estudiante> listaEstudiantes = new ArrayList<Estudiante>();
@@ -27,6 +29,10 @@ public class Principal {
         Curso arqui = new Curso("IC2020", "Arquitectura de Computadoras", (byte) 4, (byte)10);
         Curso cdi = new Curso("IC2020", "Calculo Diferecial E Integral", (byte) 4, (byte)12);
 
+        listaCursos.add(poo);
+        listaCursos.add(ed);
+        listaCursos.add(arqui);
+        listaCursos.add(cdi);
 
 
         
@@ -37,10 +43,9 @@ public class Principal {
         Estudiante es1 = new Estudiante("Alejandro", 2022230350,"arnavarro@estudiantec.cr", new Date(2002,11,19), (byte)19, "Masculino","La Fortuna");
         Estudiante es2 = new Estudiante("Deivid", 2022180126, "dematute@estudiantec.cr", new Date(2002,11,23), (byte)19, "Masculino","Santa Clara");
         
-        Grupo g1 = new Grupo("L-7:00-11:30", us1, (byte)50, new Date(2022,06,10), new Date(2022,12,10), poo);
-        Grupo g2 = new Grupo("M-12:30-16:00", us3, (byte)50, new Date(2022,06,10), new Date(2022,12,10), ed);
+        Grupo g1 = new Grupo("L-7:00-11:30", us1, (byte)50, new Date(2022,06,10), new Date(2022,12,10), listaCursos.get(0));
+        Grupo g2 = new Grupo("M-12:30-16:00", us3, (byte)50, new Date(2022,06,10), new Date(2022,12,10), listaCursos.get(1));
 
-        
         
         listaProfesores.add(us1);
         listaCoordinadores.add(us2);
@@ -103,26 +108,127 @@ public class Principal {
                             System.out.print("Lugar de Procedencia: ");
                             String lugarProcedencia = in.nextLine();
 
-                            coordinadorLogeado.registrarEstudiante(nombreC, Integer.parseInt(carnet), correo, new Date(f.obtenerFecha(fecha, "dia"),f.obtenerFecha(fecha, "mes"),f.obtenerFecha(fecha, "anio")), (byte) Integer.parseInt(edad), genero, lugarProcedencia);
+                            if(f.buscarEstudiantePorCarnet( Integer.parseInt(carnet), listaEstudiantes) == null){
+                                coordinadorLogeado.registrarEstudiante(nombreC, Integer.parseInt(carnet), correo, new Date(f.obtenerFecha(fecha, "dia"),f.obtenerFecha(fecha, "mes"),f.obtenerFecha(fecha, "anio")), (byte) Integer.parseInt(edad), genero, lugarProcedencia);                              
+                                f.limpiarConsola();
+                                f.imprimirListaEstudiantes(listaEstudiantes);
+                                System.out.print("Presione enter para continuar.....");
+                                String aux = in.nextLine();
+                            }else{
+                                f.limpiarConsola();
+                                System.out.println("No Se Pudo Registrar al Estudiante (Ya Existe)");
+                                System.out.print("Presione enter para continuar.....");
+                                String aux = in.nextLine();
+                            }
 
-                            System.out.println("=== Estudiante Registrado Correctamente..... ===");
-                            f.limpiarConsola();
-                            System.out.println("Lista de Estudiantes: ");
-                            f.imprimirListaEstudiantes(listaEstudiantes);
-                            System.out.print("Presione enter para continuar.....");
-                            String aux = in.nextLine();
+                            
 
                         }
                         else if(opcion.equals("3")){
+                            f.limpiarConsola();
+                            System.out.println("=== Actualizando Estudiante..... ===");
+                            
+                            System.out.print("Carnet del Estudiante a Actualizar: ");
+                            String carnetB = in.nextLine();
 
+                            Estudiante estudianteBuscar = f.buscarEstudiantePorCarnet(Integer.parseInt(carnetB), listaEstudiantes);
+
+                            if(estudianteBuscar != null){
+                                System.out.print("Nuevo Nombre Completo: ");
+                                String nombreC = in.nextLine();
+                                System.out.print("Nuevo Carnet: ");
+                                String carnet = in.nextLine();
+                                System.out.print("Nuevo Correo: ");
+                                String correo = in.nextLine();
+                                System.out.print("Nueva Fecha Nacimiento(dd-mm-aa): ");
+                                String fecha = in.nextLine();
+                                System.out.print("Nueva Edad: ");
+                                String edad = in.nextLine();
+                                System.out.print("Nuevo Genero: ");
+                                String genero = in.nextLine();
+                                System.out.print("Nuevo Lugar de Procedencia: ");
+                                String lugarProcedencia = in.nextLine();
+                                coordinadorLogeado.actualizarEstudiante( estudianteBuscar, nombreC, correo, Integer.parseInt(carnet), new Date(f.obtenerFecha(fecha, "dia"),f.obtenerFecha(fecha, "mes"),f.obtenerFecha(fecha, "anio")),(byte) Integer.parseInt(edad), genero, lugarProcedencia);
+                                f.limpiarConsola();
+                                f.imprimirListaEstudiantes(listaEstudiantes);
+                                System.out.print("Presione enter para continuar.....");
+                                String aux = in.nextLine();
+                            }else{
+                                System.out.println("No Se Ha Encontrado El Estudiante Que Desea Modificar");
+                            }
                         }
                         else if(opcion.equals("4")){
+
+                            f.limpiarConsola();
+                            System.out.println("=== Registrando Curso..... ===");
+                            System.out.print("Codigo: ");
+                            String codigo = in.nextLine();
+                            System.out.print("Nombre: ");
+                            String nombre = in.nextLine();
+                            System.out.print("Creditos: ");
+                            String creditos = in.nextLine();
+                            System.out.print("Cantidad Horas Lectivas: ");
+                            String cantidadHorasLectivas = in.nextLine();
+                          
+                            if(f.buscarCursoPorCodigoCurso(codigo, listaCursos) == null){
+                                coordinadorLogeado.registrarCurso(codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas));
+
+                                
+                                f.limpiarConsola();
+                                f.imprimirListaCursos(listaCursos);
+                                System.out.print("Presione enter para continuar.....");
+                                String aux = in.nextLine();
+                            }else{
+                                f.limpiarConsola();
+                                System.out.println("No Se Pudo Registrar el Curso (Ya Existe)");
+                                System.out.print("Presione enter para continuar.....");
+                                String aux = in.nextLine();
+                            }
+
 
                         }
                         else if(opcion.equals("5")){
 
+                            f.limpiarConsola();
+                            System.out.println("=== Actualizando Curso..... ===");
+                            
+                            System.out.print("Codigo del Curso a Actualizar: ");
+                            String cod = in.nextLine();
+
+                            Curso cursoBuscar = f.buscarCursoPorCodigoCurso(cod, listaCursos);
+
+                            if(cursoBuscar != null){
+                                System.out.print("Nuevo Codigo: ");
+                                String codigo = in.nextLine();
+                                System.out.print("Nuevo Nombre: ");
+                                String nombre = in.nextLine();
+                                System.out.print("Nuevo Creditos: ");
+                                String creditos = in.nextLine();
+                                System.out.print("Nueva Cantidad Horas Lectivas: ");
+                                String cantidadHorasLectivas = in.nextLine();
+
+                                coordinadorLogeado.actualizarCurso(cursoBuscar, codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas));
+                                
+                                
+                                f.limpiarConsola();
+                                f.imprimirListaCursos(listaCursos);
+                                System.out.print("Presione enter para continuar.....");
+                                String aux = in.nextLine();
+                            }else{
+                                System.out.println("No Se Ha Encontrado El Curso Que Desea Modificar");
+                            }
+
                         }
                         else if(opcion.equals("6")){
+
+                        }
+                        else if(opcion.equals("7")){
+
+                        }
+                        else if(opcion.equals("8")){
+
+                        }
+                        else if(opcion.equals("9")){
 
                         }
                         else if(opcion.equals("s")){
