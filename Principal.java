@@ -311,6 +311,9 @@ public class Principal {
 
                                 }             
                                
+                                Curso cp = f.buscarCursoPorCodigo(codigo, listaCursos);
+                                f.agregarCorrequisitoyRequisito(cp, listaCursos);
+
                                 
                                 f.limpiarConsola();
                                 for (Curso c : listaCursos) {
