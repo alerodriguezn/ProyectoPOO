@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class funciones {
 
@@ -122,17 +123,7 @@ public class funciones {
         System.out.println("=======================");
     }
 
-    public void imprimirListaCursos(ArrayList<Curso> lista){
-        System.out.println("=======================");
-        System.out.println("Lista de Cursos: ");
-
-        for (Curso c : lista) {
-
-            System.out.println(c.toString());
-            
-        }
-        System.out.println("=======================");
-    }
+    
 
 
     public Estudiante buscarEstudiantePorCarnet(int carnet, ArrayList<Estudiante> lista){
@@ -146,16 +137,61 @@ public class funciones {
 
     }
 
-    public Curso buscarCursoPorCodigoCurso(String codigo,ArrayList<Curso> lista){
+    public Curso buscarCursoPorCodigo(String codigo,ArrayList<Curso> lista){
         for (Curso c : lista) {
             if(codigo.equals(c.getCodigo())){
                 return c;
             }
         }
-
         return null;
-        
     } 
+
+
+    //Esta funcion se puede mover a otra clase (revisar despues)
+    public void agregarCorrequisitoyRequisito(Curso curso, ArrayList<Curso> lista){
+        while(true){
+            limpiarConsola();
+            System.out.println("Desea agregar un correquisito(s/n): ");
+            Scanner in = new Scanner(System.in);
+            String op = in.nextLine();
+              
+
+            if (op.equals("s")){
+                System.out.println("Digite el CODIGO del curso(Correquisito):");
+                String cod = in.nextLine();
+                Curso correquisito = buscarCursoPorCodigo(cod, lista);   
+                curso.agregarCorrequisito(correquisito);
+                System.out.println("Correquisito Agregado Correctamente");
+            }
+            else if(op.equals("n")){
+                break;
+            }
+        }
+        while(true){
+            limpiarConsola();
+            System.out.println("Desea agregar un Requisito(s/n): ");
+            Scanner in = new Scanner(System.in);
+            String op = in.nextLine();
+            
+
+            if (op.equals("s")){
+                System.out.println("Digite el CODIGO del curso(Requisito):");
+                String cod = in.nextLine();
+                Curso requisito = buscarCursoPorCodigo(cod, lista);
+                curso.agregarRequisito(requisito);
+                System.out.println("Requisito Agregado Correctamente");
+            }
+            else if(op.equals("n")){
+                break;
+            }
+        }
+
+      
+    }
+    
+
+
+   
 
 
 }

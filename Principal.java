@@ -2,13 +2,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import javax.lang.model.util.ElementScanner6;
+import javax.sound.midi.Soundbank;
 
 public class Principal {
 
 
-    // Listas
-   
+    // Listas Cursos [Presenciales] [Virtual Sincronicos] [Virtual Asincronicos]
     public static ArrayList<Curso> listaCursos = new ArrayList<Curso>();
+
+
+
+
 
     public static ArrayList<Coordinador> listaCoordinadores = new ArrayList<Coordinador>();
     public static ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();
@@ -24,10 +28,10 @@ public class Principal {
     //Funcion para pruebas
     public static void cargarDatos(){
 
-        Curso poo = new Curso("IC2022", "Programacion Orientada a Objetos", (byte) 3, (byte)8);
-        Curso ed = new Curso("IC2021", "Estructuras de Datos", (byte) 4, (byte)10);
-        Curso arqui = new Curso("IC2020", "Arquitectura de Computadoras", (byte) 4, (byte)10);
-        Curso cdi = new Curso("IC2020", "Calculo Diferecial E Integral", (byte) 4, (byte)12);
+        Curso poo = new Curso("IC2022", "Programacion Orientada a Objetos", (byte) 3, (byte)8, "L-7:55-11:30",17);
+        Curso ed = new Curso("IC2021", "Estructuras de Datos", (byte) 4, (byte)10,"Microsoft Teams");
+        Curso arqui = new Curso("IC2020", "Arquitectura de Computadoras", (byte) 4, (byte)10,"M-7:55-11:30", "Zoom");
+        Curso cdi = new Curso("IC2019", "Calculo Diferecial E Integral", (byte) 4, (byte)12,"J-7:00-9:45","b14");
 
         listaCursos.add(poo);
         listaCursos.add(ed);
@@ -64,6 +68,8 @@ public class Principal {
         funciones f = new funciones(); //Archivo con funciones.
 
         //us2.registrarUsuario();
+
+        
 
         while(true){
             f.menuInicioSesion();
@@ -169,33 +175,108 @@ public class Principal {
                             String creditos = in.nextLine();
                             System.out.print("Cantidad Horas Lectivas: ");
                             String cantidadHorasLectivas = in.nextLine();
-                          
-                            if(f.buscarCursoPorCodigoCurso(codigo, listaCursos) == null){
-                                coordinadorLogeado.registrarCurso(codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas));
 
-                                
-                                f.limpiarConsola();
-                                f.imprimirListaCursos(listaCursos);
-                                System.out.print("Presione enter para continuar.....");
-                                String aux = in.nextLine();
-                            }else{
-                                f.limpiarConsola();
-                                System.out.println("No Se Pudo Registrar el Curso (Ya Existe)");
-                                System.out.print("Presione enter para continuar.....");
-                                String aux = in.nextLine();
+                            
+                            System.out.println("Modalidades: ");
+                            System.out.println("[1] Presencial");
+                            System.out.println("[2] Virtual-Sincronico");
+                            System.out.println("[3] Virtual-Asincronico");
+                            System.out.println("Elija una modalidad: ");
+                            String modalidad = in.nextLine();
+                            
+
+                            if (modalidad.equals("1")){
+
+                                if(f.buscarCursoPorCodigo(codigo, listaCursos) == null){
+                                    System.out.print("Horario: ");
+                                    String horario = in.nextLine();
+                                    System.out.print("Aula: ");
+                                    String aula = in.nextLine();
+                                    coordinadorLogeado.registrarCursoPresencial(codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas),horario,Integer.parseInt(aula));
+                                    Curso cp = f.buscarCursoPorCodigo(codigo, listaCursos);
+                                    f.agregarCorrequisitoyRequisito(cp, listaCursos);
+
+                                    f.limpiarConsola();
+                                    System.out.println("=== Lista de Cursos  ===");
+
+                                    for (Curso c : listaCursos) {
+                                        System.out.println(c.toString());
+                                    }
+                                    
+                                    System.out.print("Presione enter para continuar.....");
+                                    String aux = in.nextLine();
+                                }else{
+                                    f.limpiarConsola();
+                                    System.out.println("No Se Pudo Registrar el Curso (Ya Existe)");
+                                    System.out.print("Presione enter para continuar.....");
+                                    String aux = in.nextLine();
+                                }
+
+                            }
+                            else if(modalidad.equals("2")){
+
+                                if(f.buscarCursoPorCodigo(codigo, listaCursos) == null){
+                                    System.out.print("Plataforma: ");
+                                    String plataforma = in.nextLine();
+                                    coordinadorLogeado.registrarCursoVA(codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas),plataforma);
+                                    Curso cp = f.buscarCursoPorCodigo(codigo, listaCursos);
+                                    f.agregarCorrequisitoyRequisito(cp, listaCursos);
+
+                                    f.limpiarConsola();
+                                    System.out.println("=== Lista de Cursos ===");
+
+                                    for (Curso c : listaCursos) {
+                                        System.out.println(c.toString());
+                                    }
+                                    
+                                    System.out.print("Presione enter para continuar.....");
+                                    String aux = in.nextLine();
+                                }else{
+                                    f.limpiarConsola();
+                                    System.out.println("No Se Pudo Registrar el Curso (Ya Existe)");
+                                    System.out.print("Presione enter para continuar.....");
+                                    String aux = in.nextLine();
+                                }
+
+                            }
+                            else if(modalidad.equals("3")){
+                                if(f.buscarCursoPorCodigo(codigo, listaCursos) == null){
+                                    System.out.print("Horario: ");
+                                    String horario = in.nextLine();
+                                    System.out.print("Plataforma: ");
+                                    String plataforma = in.nextLine();
+                                    coordinadorLogeado.registrarCursoVS(codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas),horario,plataforma);
+                                    Curso cp = f.buscarCursoPorCodigo(codigo, listaCursos);
+                                    f.agregarCorrequisitoyRequisito(cp, listaCursos);
+
+                                    f.limpiarConsola();
+                                    System.out.println("=== Lista de Cursos ===");
+
+                                    for (Curso c : listaCursos) {
+                                        System.out.println(c.toString());
+                                    }                                   
+                                    System.out.print("Presione enter para continuar.....");
+                                    String aux = in.nextLine();
+                                }else{
+                                    f.limpiarConsola();
+                                    System.out.println("No Se Pudo Registrar el Curso (Ya Existe)");
+                                    System.out.print("Presione enter para continuar.....");
+                                    String aux = in.nextLine();
+                                }
                             }
 
 
                         }
                         else if(opcion.equals("5")){
 
+                            
                             f.limpiarConsola();
                             System.out.println("=== Actualizando Curso..... ===");
                             
                             System.out.print("Codigo del Curso a Actualizar: ");
                             String cod = in.nextLine();
 
-                            Curso cursoBuscar = f.buscarCursoPorCodigoCurso(cod, listaCursos);
+                            Curso cursoBuscar = f.buscarCursoPorCodigo(cod, listaCursos);
 
                             if(cursoBuscar != null){
                                 System.out.print("Nuevo Codigo: ");
@@ -207,16 +288,41 @@ public class Principal {
                                 System.out.print("Nueva Cantidad Horas Lectivas: ");
                                 String cantidadHorasLectivas = in.nextLine();
 
-                                coordinadorLogeado.actualizarCurso(cursoBuscar, codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas));
-                                
+                                //Si no tiene plataforma es Presencial
+                                if(cursoBuscar.getPlataforma() == null){
+                                    System.out.print("Nuevo Horario: ");
+                                    String horario = in.nextLine();
+                                    System.out.print("Nueva Aula: ");
+                                    String aula = in.nextLine();
+                                    coordinadorLogeado.actualizarCursoPresencial(cursoBuscar, codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas),horario,Integer.parseInt(aula) );
+                                }// Si no tiene horario es VirtualAsin
+                                else if(cursoBuscar.getHorario() == null ){
+                                    System.out.print("Nueva Plataforma: ");
+                                    String plataforma = in.nextLine();
+                                    coordinadorLogeado.actualizarCursoVA(cursoBuscar, codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas), plataforma);
+                                    
+                                }
+                                else{// Si no tiene horario es VirtualSincro
+                                    System.out.print("Nuevo Horario: ");
+                                    String horario = in.nextLine();
+                                    System.out.print("Nueva Plataforma: ");
+                                    String plataforma = in.nextLine();
+                                    coordinadorLogeado.actualizarCursoVS(cursoBuscar, codigo, nombre, (byte) Integer.parseInt(creditos) , (byte)Integer.parseInt(cantidadHorasLectivas), horario, plataforma);
+
+                                }             
+                               
                                 
                                 f.limpiarConsola();
-                                f.imprimirListaCursos(listaCursos);
+                                for (Curso c : listaCursos) {
+                                    System.out.println(c.toString());
+                                }   
+                                
                                 System.out.print("Presione enter para continuar.....");
                                 String aux = in.nextLine();
                             }else{
                                 System.out.println("No Se Ha Encontrado El Curso Que Desea Modificar");
                             }
+                            
 
                         }
                         else if(opcion.equals("6")){

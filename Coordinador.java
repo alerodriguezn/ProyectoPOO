@@ -72,20 +72,49 @@ public class Coordinador extends Usuario{
     /*
      * Funcion que ingresa un nuevo curso
      */
-    public void registrarCurso(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
+    public void registrarCursoPresencial(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String horario, int aula)
     {
-        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas));
+        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas,horario,aula));
     }
+
+    public void registrarCursoVA(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String plataforma){
+        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas, plataforma));
+    }
+
+    public void registrarCursoVS(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String horario,String plataforma){
+        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas,horario, plataforma));
+    }
+
 
     /*
      * Funcion que actualiza un curso
      */
-    public void actualizarCurso(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
+    public void actualizarCursoPresencial(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String horario, int aula)
     {
         c.setCodigo(codigo);
         c.setNombre(nombre);
         c.setCreditos(creditos);
         c.setCantidadHorasLectivas(cantidadHorasLectivas);
+        c.setHorario(horario);
+        c.setAula(aula);
+    }
+    public void actualizarCursoVA(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas, String plataforma)
+    {
+        c.setCodigo(codigo);
+        c.setNombre(nombre);
+        c.setCreditos(creditos);
+        c.setCantidadHorasLectivas(cantidadHorasLectivas);
+        c.setPlataforma(plataforma);
+    }
+
+    public void actualizarCursoVS(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas, String horario, String plataforma)
+    {
+        c.setCodigo(codigo);
+        c.setNombre(nombre);
+        c.setCreditos(creditos);
+        c.setCantidadHorasLectivas(cantidadHorasLectivas);
+        c.setHorario(horario);
+        c.setPlataforma(plataforma);
     }
 
     /*
