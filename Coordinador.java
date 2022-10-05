@@ -72,66 +72,74 @@ public class Coordinador extends Usuario{
     /*
      * Funcion que ingresa un nuevo curso
      */
-    public void registrarCursoPresencial(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String horario, int aula)
+    public void registrarCurso(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
     {
-        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas,horario,aula));
-    }
-
-    public void registrarCursoVA(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String plataforma){
-        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas, plataforma));
-    }
-
-    public void registrarCursoVS(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String horario,String plataforma){
-        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas,horario, plataforma));
+        p.listaCursos.add(new Curso(codigo, nombre, creditos, cantidadHorasLectivas));
     }
 
 
     /*
      * Funcion que actualiza un curso
      */
-    public void actualizarCursoPresencial(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas,String horario, int aula)
+    public void actualizarCurso(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
     {
         c.setCodigo(codigo);
         c.setNombre(nombre);
         c.setCreditos(creditos);
         c.setCantidadHorasLectivas(cantidadHorasLectivas);
-        c.setHorario(horario);
-        c.setAula(aula);
     }
-    public void actualizarCursoVA(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas, String plataforma)
+    
+    /*
+     * Funcion que ingresa un nuevo grupo
+     */
+    public void registrarGrupoPresencial(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, int aula)
     {
-        c.setCodigo(codigo);
-        c.setNombre(nombre);
-        c.setCreditos(creditos);
-        c.setCantidadHorasLectivas(cantidadHorasLectivas);
-        c.setPlataforma(plataforma);
+        p.listaGrupos.add(new Grupo(horario, profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, aula));
     }
 
-    public void actualizarCursoVS(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas, String horario, String plataforma)
-    {
-        c.setCodigo(codigo);
-        c.setNombre(nombre);
-        c.setCreditos(creditos);
-        c.setCantidadHorasLectivas(cantidadHorasLectivas);
-        c.setHorario(horario);
-        c.setPlataforma(plataforma);
+    public void registrarGrupoVA(Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma){
+        p.listaGrupos.add(new Grupo(profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma));
     }
+
+    public void registrarGrupoVS(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma){
+        p.listaGrupos.add(new Grupo(horario, profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma));
+    }
+
 
     /*
-     * Funcion que crea un nuevo grupo
+     * Funcion que actualiza un curso
      */
-    public void registrarGrupo(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso)
+    public void actualizarGrupoPresencial(Grupo g, String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, int aula)
     {
-        p.listaGrupos.add(new Grupo(horario, profesor,numeroGrupo,fechaInicio,fechaFinalizacion, curso));
+        g.setHorario(horario);
+        g.setProfesor(profesor);
+        g.setNumeroGrupo(numeroGrupo);
+        g.setFechaInicio(fechaInicio);
+        g.setFechaFinalizacion(fechaFinalizacion);
+        g.setCurso(curso);
+        g.setAula(aula);
+    }
+    public void actualizarGrupoVA(Grupo g, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma)
+    {
+        g.setProfesor(profesor);
+        g.setNumeroGrupo(numeroGrupo);
+        g.setFechaInicio(fechaInicio);
+        g.setFechaFinalizacion(fechaFinalizacion);
+        g.setCurso(curso);
+        g.setPlataforma(plataforma);
     }
 
-    /*
-     * Funcion que actualiza un grupo
-     */
-    public void actualizarGrupo()
+    public void actualizarGrupoVS(Grupo g, String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma)
     {
-        System.out.println("Funcion");
+        g.setHorario(horario);
+        g.setProfesor(profesor);
+        g.setNumeroGrupo(numeroGrupo);
+        g.setFechaInicio(fechaInicio);
+        g.setFechaFinalizacion(fechaFinalizacion);
+        g.setCurso(curso);
+        g.setPlataforma(plataforma);
     }
+
 
     /*
      * Funcion que asocia una matricula con el estudiante

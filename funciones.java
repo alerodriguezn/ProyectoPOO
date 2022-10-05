@@ -97,7 +97,17 @@ public class funciones {
         return datosCorrectos;
     }
     
-
+    public boolean existeGrupo(String codigoCurso, byte numGrupo, ArrayList<Grupo> listaGrupos) {
+        boolean existeGrupo = false;
+        for (Grupo g : listaGrupos) {
+            if (codigoCurso.equals(g.getCurso().getCodigo()) && (g.getNumeroGrupo() == numGrupo)){
+                existeGrupo = true;
+                return existeGrupo;
+            }
+        }
+        return existeGrupo;
+    }
+    
 
     public int obtenerFecha(String fecha, String tipo){
         if (tipo == "dia"){
@@ -107,7 +117,7 @@ public class funciones {
             return Integer.parseInt(String.valueOf(fecha.charAt(3)).concat(String.valueOf(fecha.charAt(4))));
         }
         else{
-            return Integer.parseInt(String.valueOf(fecha.charAt(6)).concat(String.valueOf(fecha.charAt(7))).concat(String.valueOf(fecha.charAt(8))).concat(String.valueOf(fecha.charAt(9))));
+            return Integer.parseInt(String.valueOf(fecha.charAt(6)).concat(String.valueOf(fecha.charAt(7))).concat(String.valueOf(fecha.charAt(8))).concat(String.valueOf(fecha.charAt(9))))-1900;
         }
     }
 
@@ -146,6 +156,24 @@ public class funciones {
         return null;
     } 
 
+    public Grupo buscarGrupoPorNumeroCurso(String codigoCurso, byte numGrupo , ArrayList<Grupo> lista){
+        for (Grupo g : lista) {
+            if((codigoCurso.equals(g.getCurso().getCodigo()))&&(numGrupo == g.getNumeroGrupo())){
+                return g;
+            }
+        }
+        return null;
+    } 
+
+
+    public Profesor buscarProfesorPorNombre(String nombre,ArrayList<Profesor> lista){
+        for (Profesor p : lista) {
+            if(nombre.equals(p.getNombre())){
+                return p;
+            }
+        }
+        return null;
+    } 
 
     //Esta funcion se puede mover a otra clase (revisar despues)
     public void agregarCorrequisitoyRequisito(Curso curso, ArrayList<Curso> lista){
