@@ -112,6 +112,16 @@ public class Grupo {
         this.plataforma = plataforma;
     }
 
+    public boolean validarProfesor(String nombre){
+        if(this.profesor.getNombre() == nombre){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
     public String toString() {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

@@ -533,21 +533,32 @@ public class Principal {
                         if (opcion.equals("1")) {
                             f.limpiarConsola();
                             System.out.println("=== Registrando Nota de Estudiante..... ===");
-                            System.out.print("Carnet del Estudiante: ");
-                            String carnet = in.nextLine();
-                            Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet),
-                                    listaEstudiantes);
+                            System.out.println("Codigo del Curso: ");
+                            String cod = in.nextLine();
+                            System.out.println("Numero de Grupo: ");
+                            String numGrupo = in.nextLine();
 
-                            System.out.print("Nota: ");
-                            String nota = in.nextLine();
-                            // Aqui se deberia de desplegar los cursos matriculados del Estudiante y que el
-                            // profesor pueda elejir
-                            System.out.print("Curso: ");
-                            String curso = in.nextLine();
+                            Grupo g = f.buscarGrupoPorNumeroCurso(cod,Byte.parseByte(numGrupo),listaGrupos);
+                            
+                            if(g.validarProfesor(profesorLogeado.getNombre())){
+                                System.out.print("Carnet del Estudiante: ");
+                                String carnet = in.nextLine();
+                                Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+                                System.out.print("Nota: ");
+                                String nota = in.nextLine();
 
-                            // Aqui solo lo estoy probando, Hay que cambiarlo
-                            profesorLogeado.registrarCalificacion(e, listaGrupos.get(0),
-                                    Float.parseFloat(nota));
+                                profesorLogeado.registrarCalificacion(e, g, Float.parseFloat(nota));
+                                System.out.println("Calificacion Agregada Correctamente");
+                                e.imprimirCalifaciones();
+
+                                System.out.println("Presione enter para continuar...");
+                                in.nextLine();
+
+                            }else{
+                                System.out.println("No tienes los permisos suficientes para asignar la nota");
+                                System.out.println("Presione enter para continuar...");
+                                in.nextLine();
+                            }
 
                         } else if (opcion.equals("2")) {
 

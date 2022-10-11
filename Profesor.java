@@ -1,9 +1,27 @@
+import java.util.ArrayList;
+
 public class Profesor extends Usuario{
+
+    private ArrayList<Grupo> listaGrupos;
     
     public Profesor(String nombre,String telefono, String correo, String usuario, String contrasena){
         
         super(nombre, telefono, correo, usuario, contrasena, false);
+        this.listaGrupos = new ArrayList<Grupo>();
 
+    }
+    public void setGrupo(Grupo grupo) {
+        this.listaGrupos.add(grupo);
+    }
+
+    public ArrayList<Grupo> getGrupos() {
+        return this.listaGrupos;
+    }
+
+    public void imprimirGrupos(){
+        for (Grupo g : this.listaGrupos) {
+            System.out.println("Numero de Grupo: "+g.getNumeroGrupo() +" | Nombre del Curso: " +g.getCurso().getNombre());
+        }
     }
 
     /*

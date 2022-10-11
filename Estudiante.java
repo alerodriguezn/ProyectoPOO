@@ -94,7 +94,14 @@ public class Estudiante extends Usuario{
     }
 
     public void setCalificaciones(float nota, Grupo grupo) {
-        this.calificaciones.add(new Calificacion(this, nota, grupo));
+        this.calificaciones.add(new Calificacion(nota, grupo));
+    }
+
+    public void imprimirCalifaciones(){
+        for (Calificacion c : this.calificaciones) {
+            System.out.println("Nota: " + String.valueOf(c.getNota()) +" | Curso: "+ c.getGrupo().getCurso().getNombre());
+            
+        }
     }
 
     public ArrayList<Grupo> getcursosMatriculados() {

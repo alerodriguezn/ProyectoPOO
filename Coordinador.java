@@ -94,15 +94,21 @@ public class Coordinador extends Usuario{
      */
     public void registrarGrupoPresencial(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, int aula)
     {
-        p.listaGrupos.add(new Grupo(horario, profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, aula));
+        Grupo g = new Grupo(horario, profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, aula);
+        p.listaGrupos.add(g);
+        profesor.setGrupo(g);
     }
 
     public void registrarGrupoVA(Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma){
-        p.listaGrupos.add(new Grupo(profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma));
+        Grupo g = new Grupo(profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma);
+        p.listaGrupos.add(g);
+        profesor.setGrupo(g);
     }
 
     public void registrarGrupoVS(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma){
-        p.listaGrupos.add(new Grupo(horario, profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma));
+        Grupo g = new Grupo(horario, profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma);
+        p.listaGrupos.add(g);
+        profesor.setGrupo(g);
     }
 
 
