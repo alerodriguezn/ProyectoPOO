@@ -40,10 +40,10 @@ public class Principal {
         Estudiante es2 = new Estudiante("Deivid", 2022180126, "dematute@estudiantec.cr", new Date(2002, 11, 23),
                 (byte) 19, "Masculino", "Santa Clara");
 
-        Grupo g1 = new Grupo("L-7:00-11:30", us1, (byte) 50, new Date(2022-1900, 2, 03), new Date(2022, 8, 10),
-                listaCursos.get(0),17);
-        Grupo g2 = new Grupo("M-12:30-16:00", us3, (byte) 50, new Date(2022-1900, 2, 04), new Date(2022, 8, 11),
-                listaCursos.get(1),"Zoom");
+        Grupo g1 = new Grupo("L-7:00-11:30", us1, (byte) 50, new Date(2022 - 1900, 2, 03), new Date(2022, 8, 10),
+                listaCursos.get(0), 17);
+        Grupo g2 = new Grupo("M-12:30-16:00", us3, (byte) 50, new Date(2022 - 1900, 2, 04), new Date(2022, 8, 11),
+                listaCursos.get(1), "Zoom");
 
         listaProfesores.add(us1);
         listaCoordinadores.add(us2);
@@ -52,7 +52,7 @@ public class Principal {
         listaGrupos.add(g1);
         listaGrupos.add(g2);
         listaProfesores.add(us3);
-    
+
     }
 
     public static void main(String[] args) {
@@ -171,8 +171,8 @@ public class Principal {
                             System.out.print("Cantidad Horas Lectivas: ");
                             String cantidadHorasLectivas = in.nextLine();
                             coordinadorLogeado.registrarCurso(codigo, nombre,
-                                            (byte) Integer.parseInt(creditos),
-                                            (byte) Integer.parseInt(cantidadHorasLectivas));
+                                    (byte) Integer.parseInt(creditos),
+                                    (byte) Integer.parseInt(cantidadHorasLectivas));
                             Curso cp = f.buscarCursoPorCodigo(codigo, listaCursos);
                             f.agregarCorrequisitoyRequisito(cp, listaCursos);
                             f.limpiarConsola();
@@ -220,8 +220,10 @@ public class Principal {
 
                                     Curso cp = f.buscarCursoPorCodigo(codigo, listaCursos);
                                     f.agregarCorrequisitoyRequisito(cp, listaCursos);
-                                    coordinadorLogeado.actualizarCurso(cursoBuscar, codigo, nombre, (byte) Integer.parseInt(creditos), (byte) Integer.parseInt(cantidadHorasLectivas));
-                                    
+                                    coordinadorLogeado.actualizarCurso(cursoBuscar, codigo, nombre,
+                                            (byte) Integer.parseInt(creditos),
+                                            (byte) Integer.parseInt(cantidadHorasLectivas));
+
                                     f.limpiarConsola();
                                     System.out.println("¡Curso Actualizado Correctamente!");
                                     System.out.print("Presione enter para mostrar los cursos.....");
@@ -233,7 +235,8 @@ public class Principal {
                                     System.out.print("Presione enter para continuar.....");
                                     in.nextLine();
                                 } catch (Exception e) {
-                                    System.out.println("Lo sentimos, ha ocurrido un error al intentar actualizar el curso");
+                                    System.out.println(
+                                            "Lo sentimos, ha ocurrido un error al intentar actualizar el curso");
                                     cursoBuscar.setCorrequisitos(correquisitosRespaldo);
                                     cursoBuscar.setRequisitos(requisitosRespaldo);
                                 }
@@ -248,11 +251,11 @@ public class Principal {
                             System.out.print("Profesor: ");
                             String profesor = in.nextLine();
                             // VALIDAR SI EL PROFE EXISTE
-                            
+
                             System.out.print("Codigo del Curso: ");
                             String codigoCurso = in.nextLine();
                             System.out.print("Numero del Grupo: ");
-                            String numGrupo =  in.nextLine();
+                            String numGrupo = in.nextLine();
                             System.out.print("Fecha Inicio (dd-mm-aa): ");
                             String fechaInicio = in.nextLine();
                             System.out.print("Fecha Final (dd-mm-aa): ");
@@ -273,12 +276,16 @@ public class Principal {
                                     String horario = in.nextLine();
                                     System.out.print("Aula: ");
                                     String aula = in.nextLine();
-                                    coordinadorLogeado.registrarGrupoPresencial(horario, f.buscarProfesorPorNombre(profesor,listaProfesores),
-                                                (byte) Integer.parseInt(numGrupo), 
-                                                new Date(f.obtenerFecha(fechaInicio, "anio"), f.obtenerFecha(fechaInicio, "mes"),
-                                                f.obtenerFecha(fechaInicio, "dia")),
-                                                new Date(f.obtenerFecha(fechaFinal, "anio"), f.obtenerFecha(fechaFinal, "mes"),
-                                                f.obtenerFecha(fechaFinal, "dia")),cursoGrupo,Integer.parseInt(aula));
+                                    coordinadorLogeado.registrarGrupoPresencial(horario,
+                                            f.buscarProfesorPorNombre(profesor, listaProfesores),
+                                            (byte) Integer.parseInt(numGrupo),
+                                            new Date(f.obtenerFecha(fechaInicio, "anio"),
+                                                    f.obtenerFecha(fechaInicio, "mes"),
+                                                    f.obtenerFecha(fechaInicio, "dia")),
+                                            new Date(f.obtenerFecha(fechaFinal, "anio"),
+                                                    f.obtenerFecha(fechaFinal, "mes"),
+                                                    f.obtenerFecha(fechaFinal, "dia")),
+                                            cursoGrupo, Integer.parseInt(aula));
 
                                     f.limpiarConsola();
                                     System.out.println("=== Lista de Grupos  ===");
@@ -301,12 +308,16 @@ public class Principal {
                                 if (cursoGrupo != null) {
                                     System.out.print("Plataforma: ");
                                     String plataforma = in.nextLine();
-                                    coordinadorLogeado.registrarGrupoVA(f.buscarProfesorPorNombre(profesor,listaProfesores),
-                                    (byte) Integer.parseInt(numGrupo), 
-                                    new Date(f.obtenerFecha(fechaInicio, "anio"), f.obtenerFecha(fechaInicio, "mes"),
-                                    f.obtenerFecha(fechaInicio, "dia")),
-                                    new Date(f.obtenerFecha(fechaFinal, "anio"), f.obtenerFecha(fechaFinal, "mes"),
-                                    f.obtenerFecha(fechaFinal, "dia")),cursoGrupo,plataforma);
+                                    coordinadorLogeado.registrarGrupoVA(
+                                            f.buscarProfesorPorNombre(profesor, listaProfesores),
+                                            (byte) Integer.parseInt(numGrupo),
+                                            new Date(f.obtenerFecha(fechaInicio, "anio"),
+                                                    f.obtenerFecha(fechaInicio, "mes"),
+                                                    f.obtenerFecha(fechaInicio, "dia")),
+                                            new Date(f.obtenerFecha(fechaFinal, "anio"),
+                                                    f.obtenerFecha(fechaFinal, "mes"),
+                                                    f.obtenerFecha(fechaFinal, "dia")),
+                                            cursoGrupo, plataforma);
 
                                     f.limpiarConsola();
                                     System.out.println("=== Lista de Grupos ===");
@@ -330,12 +341,16 @@ public class Principal {
                                     String horario = in.nextLine();
                                     System.out.print("Plataforma: ");
                                     String plataforma = in.nextLine();
-                                    coordinadorLogeado.registrarGrupoVS(horario, f.buscarProfesorPorNombre(profesor,listaProfesores),
-                                    (byte) Integer.parseInt(numGrupo), 
-                                    new Date(f.obtenerFecha(fechaInicio, "anio"), f.obtenerFecha(fechaInicio, "mes"),
-                                    f.obtenerFecha(fechaInicio, "dia")),
-                                    new Date(f.obtenerFecha(fechaFinal, "anio"), f.obtenerFecha(fechaFinal, "mes"),
-                                    f.obtenerFecha(fechaFinal, "dia")),cursoGrupo,plataforma);
+                                    coordinadorLogeado.registrarGrupoVS(horario,
+                                            f.buscarProfesorPorNombre(profesor, listaProfesores),
+                                            (byte) Integer.parseInt(numGrupo),
+                                            new Date(f.obtenerFecha(fechaInicio, "anio"),
+                                                    f.obtenerFecha(fechaInicio, "mes"),
+                                                    f.obtenerFecha(fechaInicio, "dia")),
+                                            new Date(f.obtenerFecha(fechaFinal, "anio"),
+                                                    f.obtenerFecha(fechaFinal, "mes"),
+                                                    f.obtenerFecha(fechaFinal, "dia")),
+                                            cursoGrupo, plataforma);
 
                                     f.limpiarConsola();
                                     System.out.println("=== Lista de Grupos ===");
@@ -353,30 +368,28 @@ public class Principal {
                                 }
                             }
 
-                           
                         } else if (opcion.equals("7")) {
                             f.limpiarConsola();
                             System.out.println("=== Actualizando Grupo..... ===");
-                            
+
                             // Pedir para obtener el codigo del curso y num del grupo
                             System.out.print("Codigo del Curso Asociado: ");
                             String codigoCurso1 = in.nextLine();
-                            
+
                             System.out.print("Numero del Grupo a Modificar: ");
                             String numGrupo1 = in.nextLine();
 
                             // Validar que el grupo exista
-                            if(f.existeGrupo(codigoCurso1, (byte) Integer.parseInt(numGrupo1),listaGrupos))
-                            {
+                            if (f.existeGrupo(codigoCurso1, (byte) Integer.parseInt(numGrupo1), listaGrupos)) {
                                 System.out.print("Nuevo Profesor: ");
                                 String profesor = in.nextLine();
-                                
+
                                 // VALIDAR SI EL PROFE EXISTE
-                                
+
                                 System.out.print("Nuevo Codigo del Curso: ");
                                 String codigoCurso2 = in.nextLine();
                                 System.out.print("Nuevo Numero del Grupo: ");
-                                String numGrupo2 =  in.nextLine();
+                                String numGrupo2 = in.nextLine();
                                 System.out.print("Nueva Fecha Inicio (dd-mm-aa): ");
                                 String fechaInicio = in.nextLine();
                                 System.out.print("Nueva Fecha Final (dd-mm-aa): ");
@@ -390,7 +403,8 @@ public class Principal {
                                 String modalidad = in.nextLine();
 
                                 Curso cursoGrupo = f.buscarCursoPorCodigo(codigoCurso2, listaCursos);
-                                Grupo grupo = f.buscarGrupoPorNumeroCurso(codigoCurso1, (byte) Integer.parseInt(numGrupo1) , listaGrupos);
+                                Grupo grupo = f.buscarGrupoPorNumeroCurso(codigoCurso1,
+                                        (byte) Integer.parseInt(numGrupo1), listaGrupos);
 
                                 if (modalidad.equals("1")) {
 
@@ -399,12 +413,16 @@ public class Principal {
                                         String horario = in.nextLine();
                                         System.out.print("Aula: ");
                                         String aula = in.nextLine();
-                                        coordinadorLogeado.actualizarGrupoPresencial(grupo, horario, f.buscarProfesorPorNombre(profesor,listaProfesores),
-                                                    (byte) Integer.parseInt(numGrupo2), 
-                                                    new Date(f.obtenerFecha(fechaInicio, "anio"), f.obtenerFecha(fechaInicio, "mes"),
-                                                    f.obtenerFecha(fechaInicio, "dia")),
-                                                    new Date(f.obtenerFecha(fechaFinal, "anio"), f.obtenerFecha(fechaFinal, "mes"),
-                                                    f.obtenerFecha(fechaFinal, "dia")),cursoGrupo,Integer.parseInt(aula));
+                                        coordinadorLogeado.actualizarGrupoPresencial(grupo, horario,
+                                                f.buscarProfesorPorNombre(profesor, listaProfesores),
+                                                (byte) Integer.parseInt(numGrupo2),
+                                                new Date(f.obtenerFecha(fechaInicio, "anio"),
+                                                        f.obtenerFecha(fechaInicio, "mes"),
+                                                        f.obtenerFecha(fechaInicio, "dia")),
+                                                new Date(f.obtenerFecha(fechaFinal, "anio"),
+                                                        f.obtenerFecha(fechaFinal, "mes"),
+                                                        f.obtenerFecha(fechaFinal, "dia")),
+                                                cursoGrupo, Integer.parseInt(aula));
 
                                         f.limpiarConsola();
                                         System.out.println("=== Lista de Grupos  ===");
@@ -427,12 +445,16 @@ public class Principal {
                                     if (cursoGrupo != null) {
                                         System.out.print("Plataforma: ");
                                         String plataforma = in.nextLine();
-                                        coordinadorLogeado.actualizarGrupoVA(grupo,f.buscarProfesorPorNombre(profesor,listaProfesores),
-                                        (byte) Integer.parseInt(numGrupo2), 
-                                        new Date(f.obtenerFecha(fechaInicio, "anio"), f.obtenerFecha(fechaInicio, "mes"),
-                                        f.obtenerFecha(fechaInicio, "dia")),
-                                        new Date(f.obtenerFecha(fechaFinal, "anio"), f.obtenerFecha(fechaFinal, "mes"),
-                                        f.obtenerFecha(fechaFinal, "dia")),cursoGrupo,plataforma);
+                                        coordinadorLogeado.actualizarGrupoVA(grupo,
+                                                f.buscarProfesorPorNombre(profesor, listaProfesores),
+                                                (byte) Integer.parseInt(numGrupo2),
+                                                new Date(f.obtenerFecha(fechaInicio, "anio"),
+                                                        f.obtenerFecha(fechaInicio, "mes"),
+                                                        f.obtenerFecha(fechaInicio, "dia")),
+                                                new Date(f.obtenerFecha(fechaFinal, "anio"),
+                                                        f.obtenerFecha(fechaFinal, "mes"),
+                                                        f.obtenerFecha(fechaFinal, "dia")),
+                                                cursoGrupo, plataforma);
 
                                         f.limpiarConsola();
                                         System.out.println("=== Lista de Grupos ===");
@@ -451,17 +473,21 @@ public class Principal {
                                     }
 
                                 } else if (modalidad.equals("3")) {
-                                    if (cursoGrupo != null) {   
+                                    if (cursoGrupo != null) {
                                         System.out.print("Horario: ");
                                         String horario = in.nextLine();
                                         System.out.print("Plataforma: ");
                                         String plataforma = in.nextLine();
-                                        coordinadorLogeado.actualizarGrupoVS(grupo,horario, f.buscarProfesorPorNombre(profesor,listaProfesores),
-                                        (byte) Integer.parseInt(numGrupo2), 
-                                        new Date(f.obtenerFecha(fechaInicio, "anio"), f.obtenerFecha(fechaInicio, "mes"),
-                                        f.obtenerFecha(fechaInicio, "dia")),
-                                        new Date(f.obtenerFecha(fechaFinal, "anio"), f.obtenerFecha(fechaFinal, "mes"),
-                                        f.obtenerFecha(fechaFinal, "dia")),cursoGrupo,plataforma);
+                                        coordinadorLogeado.actualizarGrupoVS(grupo, horario,
+                                                f.buscarProfesorPorNombre(profesor, listaProfesores),
+                                                (byte) Integer.parseInt(numGrupo2),
+                                                new Date(f.obtenerFecha(fechaInicio, "anio"),
+                                                        f.obtenerFecha(fechaInicio, "mes"),
+                                                        f.obtenerFecha(fechaInicio, "dia")),
+                                                new Date(f.obtenerFecha(fechaFinal, "anio"),
+                                                        f.obtenerFecha(fechaFinal, "mes"),
+                                                        f.obtenerFecha(fechaFinal, "dia")),
+                                                cursoGrupo, plataforma);
 
                                         f.limpiarConsola();
                                         System.out.println("=== Lista de Grupos ===");
@@ -477,37 +503,40 @@ public class Principal {
                                         System.out.print("Presione enter para continuar.....");
                                         in.nextLine();
                                     }
-                            }    
-                            }else{
+                                }
+                            } else {
                                 f.limpiarConsola();
                                 System.out.println("Este grupo no existe.");
                                 System.out.println("Presione enter para continuar...");
                                 in.nextLine();
                             }
-                            
 
+                        }
 
+                    }
+                }
             } else if (opcionLogin.equals("2")) {
 
                 System.out.print("Usuario: ");
-                usuario = in.nextLine();
+                String usuario = in.nextLine();
 
                 System.out.print("Contraseña: ");
-                contrasena = in.nextLine();
+                String contrasena = in.nextLine();
 
                 if ((f.validarProfesor(usuario, contrasena, listaProfesores)) && (permisosUsuarios == false)) {
 
                     while (true) {
                         f.menuProfesor();
                         System.out.print("Elija una opcion: ");
-                        opcion = in.nextLine();
+                        String opcion = in.nextLine();
 
                         if (opcion.equals("1")) {
                             f.limpiarConsola();
                             System.out.println("=== Registrando Nota de Estudiante..... ===");
                             System.out.print("Carnet del Estudiante: ");
                             String carnet = in.nextLine();
-                            Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+                            Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet),
+                                    listaEstudiantes);
 
                             System.out.print("Nota: ");
                             String nota = in.nextLine();
@@ -517,7 +546,8 @@ public class Principal {
                             String curso = in.nextLine();
 
                             // Aqui solo lo estoy probando, Hay que cambiarlo
-                            profesorLogeado.registrarCalificacion(e, listaGrupos.get(0), Float.parseFloat(nota));
+                            profesorLogeado.registrarCalificacion(e, listaGrupos.get(0),
+                                    Float.parseFloat(nota));
 
                         } else if (opcion.equals("2")) {
 
@@ -531,14 +561,10 @@ public class Principal {
 
                         }
                     }
-
                 }
             } else {
                 System.out.println("Dato incorrecto");
             }
-        }
-    }
-}
         }
     }
 }
