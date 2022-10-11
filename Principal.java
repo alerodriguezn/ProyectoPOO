@@ -40,7 +40,7 @@ public class Principal {
         Estudiante es2 = new Estudiante("Deivid", 2022180126, "dematute@estudiantec.cr", new Date(2002, 11, 23),
                 (byte) 19, "Masculino", "Santa Clara");
 
-        Grupo g1 = new Grupo("L-7:00-11:30", us1, (byte) 50, new Date(2022 - 1900, 2, 03), new Date(2022, 8, 10),
+        Grupo g1 = new Grupo("L-7:00-11:30", us3, (byte) 50, new Date(2022 - 1900, 2, 03), new Date(2022, 8, 10),
                 listaCursos.get(0), 17);
         Grupo g2 = new Grupo("M-12:30-16:00", us3, (byte) 50, new Date(2022 - 1900, 2, 04), new Date(2022, 8, 11),
                 listaCursos.get(1), "Zoom");
@@ -511,6 +511,32 @@ public class Principal {
                                 in.nextLine();
                             }
 
+                        }else if(opcion.equals("8")){
+                            f.limpiarConsola();
+                            System.out.println("=== Realizando Matricula..... ===");
+                            System.out.print("Carnet del Estudiante: ");
+                            String carnet = in.nextLine();
+                            System.out.print("Codigo del Curso: ");
+                            String cod = in.nextLine();
+                            System.out.print("Numero de Grupo: ");
+                            String numGrupo = in.nextLine();
+                            Grupo g = f.buscarGrupoPorNumeroCurso(cod,Byte.parseByte(numGrupo),listaGrupos);
+                            Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+                            if (g != null && e != null && !(g.validarEstudiante(Integer.parseInt(carnet)))){
+                                coordinadorLogeado.asociarMatriculaEstudiante(e,g);
+                                System.out.println("Estudiante Matriculado Correctamente");
+                                System.out.println("Presione enter para continuar...");
+                                in.nextLine();
+
+                            }else{
+                                System.out.println("No se ha podido Matricular al Estudiante");
+                                System.out.println("Presione enter para continuar...");
+                                in.nextLine();
+                            }
+
+                        }else if(opcion.equals("s")){
+                            break;
+
                         }
 
                     }
@@ -537,7 +563,6 @@ public class Principal {
                             String cod = in.nextLine();
                             System.out.println("Numero de Grupo: ");
                             String numGrupo = in.nextLine();
-
                             Grupo g = f.buscarGrupoPorNumeroCurso(cod,Byte.parseByte(numGrupo),listaGrupos);
                             
                             if(g.validarProfesor(profesorLogeado.getNombre())){
@@ -547,12 +572,16 @@ public class Principal {
                                 System.out.print("Nota: ");
                                 String nota = in.nextLine();
 
-                                profesorLogeado.registrarCalificacion(e, g, Float.parseFloat(nota));
-                                System.out.println("Calificacion Agregada Correctamente");
-                                e.imprimirCalifaciones();
-
-                                System.out.println("Presione enter para continuar...");
-                                in.nextLine();
+                                if(g.validarEstudiante(Integer.parseInt(carnet))){
+                                    profesorLogeado.registrarCalificacion(e, g, Float.parseFloat(nota));
+                                    System.out.println("Calificacion Agregada Correctamente");
+                                    e.imprimirCalifaciones();
+                                    System.out.println("Presione enter para continuar...");
+                                    in.nextLine();
+                                }else{
+                                    System.out.println("El estudiante no esta matriculado en este curso");
+                                }
+                                
 
                             }else{
                                 System.out.println("No tienes los permisos suficientes para asignar la nota");

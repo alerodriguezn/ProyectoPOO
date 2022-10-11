@@ -1,4 +1,5 @@
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,6 +15,7 @@ public class Grupo {
     private String horario;
     private int aula;
     private String plataforma;
+    private ArrayList<Estudiante> listaEstudiantes;
 
     // Presencial
     public Grupo(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, int aula){
@@ -24,6 +26,7 @@ public class Grupo {
         this.fechaFinalizacion = (Date)fechaFinalizacion.clone();
         this.curso = curso;
         this.aula = aula;
+        this.listaEstudiantes = new ArrayList<Estudiante>();
     }
 
     // Virtual Asincronico
@@ -34,6 +37,7 @@ public class Grupo {
         this.fechaFinalizacion = (Date)fechaFinalizacion.clone();
         this.curso = curso;
         this.plataforma = plataforma;
+        this.listaEstudiantes = new ArrayList<Estudiante>();
     }
 
     // Virtual Sincronico
@@ -45,6 +49,7 @@ public class Grupo {
         this.fechaFinalizacion = (Date)fechaFinalizacion.clone();
         this.curso = curso;
         this.plataforma = plataforma;
+        this.listaEstudiantes = new ArrayList<Estudiante>();
     }
 
     // Declaro los getters y setters
@@ -118,7 +123,31 @@ public class Grupo {
         }else{
             return false;
         }
+    }
 
+    public boolean validarEstudiante(int carnet){
+        boolean existe = false;
+        for (Estudiante e : this.listaEstudiantes) {
+            if(e.getCarnet() == carnet){
+                return true;
+            }
+        }
+        return existe;
+
+    }
+
+    public void agregarEstudiante(Estudiante e) {
+        this.listaEstudiantes.add(e);
+    }
+
+    public ArrayList<Estudiante> getEstudiantes(){
+        return this.listaEstudiantes;
+    }
+
+    void imprimirListaEstudiantes(){
+        for (Estudiante e : this.listaEstudiantes) {
+            System.out.println("- Nombre: "+ e.getNombre() + "Carnet: " + e.getCarnet());
+        }
     }
 
 

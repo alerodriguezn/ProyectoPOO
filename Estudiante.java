@@ -96,6 +96,12 @@ public class Estudiante extends Usuario{
     public void setCalificaciones(float nota, Grupo grupo) {
         this.calificaciones.add(new Calificacion(nota, grupo));
     }
+    public void imprimirCursosMatriculados(){
+        for (Grupo g : this.cursosMatriculados) {
+            System.out.println("- Curso: " + g.getCurso().getNombre());
+            
+        }
+    }
 
     public void imprimirCalifaciones(){
         for (Calificacion c : this.calificaciones) {

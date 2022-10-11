@@ -148,11 +148,12 @@ public class Coordinador extends Usuario{
 
 
     /*
-     * Funcion que asocia una matricula con el estudiante
+     * Funcion que asocia al estudiante con un grupo y viceversa
      */
-    public void asociarMatriculaEstudiante()
+    public void asociarMatriculaEstudiante(Estudiante e, Grupo g)
     {
-        System.out.println("Funcion");
+        e.setcursosMatriculados(g);
+        g.agregarEstudiante(e);
     }
 
     /*
