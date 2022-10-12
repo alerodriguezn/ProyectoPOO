@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Profesor extends Usuario{
 
@@ -35,28 +36,8 @@ public class Profesor extends Usuario{
         estudiante.setCalificaciones(nota, grupo);
     }
 
-    /*
-     * Funcion que registra tiempo adicional en evaluaciones
-     */
-    public void registrarTiempoAdicionalEvaluaciones()
-    {
-        System.out.println("Funcion");
-    }
-
-    /*
-     * Funcion que registra adecuacion
-     */
-    public void registrarAdecuacion()
-    {
-        System.out.println("Funcion");
-    }
-
-    /*
-     * Funcion que registra un reporte de una incidencia significativa
-     */
-    public void registrarReporteIncidencia()
-    {
-        System.out.println("Funcion");
+    public void setAcompanamiento(Estudiante e, Date fecha, String tipo, String nota ) {
+        e.setAcompanamiento(fecha, tipo, e, nota);
     }
 
     /*

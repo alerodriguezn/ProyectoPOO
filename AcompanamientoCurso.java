@@ -11,7 +11,7 @@ public class AcompanamientoCurso {
     private String notaDescriptiva;
 
     public AcompanamientoCurso(Date fecha, String tipo, Estudiante estudiante, String notaDescriptiva){
-        this.fecha = fecha;
+        this.fecha = (Date)fecha.clone();
         this.tipo = tipo;
         this.estudiante = estudiante;
         this.notaDescriptiva = notaDescriptiva;

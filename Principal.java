@@ -590,16 +590,37 @@ public class Principal {
                             }
 
                         } else if (opcion.equals("2")) {
+                            System.out.println("=== Registrando Acompanamiento en Curso..... ===");
+                            System.out.println("Fecha (dd/mm/yyyy): ");
+                            String fecha = in.nextLine();
+                            System.out.println("Tipo : ");
+                            String tipo = in.nextLine();
+                            System.out.println("Nota Descriptiva : ");
+                            String notaDescriptiva = in.nextLine();
+                            System.out.println("Carnet del Estudiante : ");
+                            String carnet = in.nextLine();
+
+                            Date fechaOb = new Date(f.obtenerFecha(fecha, "anio"), f.obtenerFecha(fecha, "mes"),
+                            f.obtenerFecha(fecha, "dia"));
+
+                            Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+
+                            if( e != null){
+                                profesorLogeado.setAcompanamiento(e,fechaOb,tipo,notaDescriptiva);
+
+                                System.out.println("======== Registro Completado ========");
+                                System.out.println("Presione enter para continuar...");
+                                in.nextLine();
+
+                            }
+
+
 
                         } else if (opcion.equals("3")) {
 
                         } else if (opcion.equals("4")) {
 
-                        } else if (opcion.equals("5")) {
-
-                        } else if (opcion.equals("6")) {
-
-                        }
+                        } 
                     }
                 }
             } else {

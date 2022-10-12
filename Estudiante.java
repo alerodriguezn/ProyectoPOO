@@ -13,6 +13,8 @@ public class Estudiante extends Usuario{
     private String lugarProcedencia;
     private ArrayList<Calificacion> calificaciones;
     private ArrayList<Grupo> cursosMatriculados;
+    private ArrayList<AcompanamientoCurso> listaAC;
+
 
     public Estudiante(String nombreCompleto, int carnet, String correo, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia){
 
@@ -24,7 +26,8 @@ public class Estudiante extends Usuario{
         this.lugarProcedencia = lugarProcedencia;
         this.calificaciones = new ArrayList<Calificacion>();
         this.cursosMatriculados = new ArrayList<Grupo>();
-        
+        this.listaAC = new ArrayList<AcompanamientoCurso>();
+
     }
 
     @Override
@@ -96,6 +99,12 @@ public class Estudiante extends Usuario{
     public void setCalificaciones(float nota, Grupo grupo) {
         this.calificaciones.add(new Calificacion(nota, grupo));
     }
+
+
+    public void setAcompanamiento(Date fecha, String tipo, Estudiante e,String notaD) {
+        this.listaAC.add(new AcompanamientoCurso(fecha,tipo,e,notaD));
+    }
+
     public void imprimirCursosMatriculados(){
         for (Grupo g : this.cursosMatriculados) {
             System.out.println("- Curso: " + g.getCurso().getNombre());

@@ -48,10 +48,8 @@ public class funciones {
         System.out.println("--------------------------------------------------");
         System.out.println("|                Menu Profesor                   |");
         System.out.println("|    [1]. Registrar Calificaciones               |");
-        System.out.println("|    [2]. Registro de Tiempo Adicional           |");
-        System.out.println("|    [3]. Adecuaciones                           |");
-        System.out.println("|    [4]. Reporte de incidencia significativa    |");
-        System.out.println("|    [5]. Sesiones de tutoria y asistencia       |");
+        System.out.println("|    [2]. Acompanamiento en Curso                |");
+        System.out.println("|    [3]. Sesiones de tutoria y asistencia       |");
         System.out.println("|    [s]. Atras                                  |");
         System.out.println("--------------------------------------------------");
 
@@ -138,7 +136,7 @@ public class funciones {
             return Integer.parseInt(String.valueOf(fecha.charAt(3)).concat(String.valueOf(fecha.charAt(4))));
         } else {
             return Integer.parseInt(String.valueOf(fecha.charAt(6)).concat(String.valueOf(fecha.charAt(7)))
-                    .concat(String.valueOf(fecha.charAt(8))).concat(String.valueOf(fecha.charAt(9)))) - 1900;
+                    .concat(String.valueOf(fecha.charAt(8))).concat(String.valueOf(fecha.charAt(9))));
         }
     }
 
