@@ -39,6 +39,7 @@ public class funciones {
         System.out.println("|    [7]. Editar Grupo                           |");
         System.out.println("|    [8]. Matricula-Asociacion Estudiante/Curso  |");
         System.out.println("|    [9]. Registro de Tramites Estudiantiles     |");
+        System.out.println("|    [10]. Ver los Tramites Estudiantiles        |");
         System.out.println("|    [s]. Atras                                  |");
         System.out.println("--------------------------------------------------");
     }

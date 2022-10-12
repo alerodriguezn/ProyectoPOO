@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class TramitesEstudiantiles {
@@ -35,6 +36,7 @@ class LevantamientoRequisitos extends TramitesEstudiantiles{
     private Curso cursoALevantar;
     private String justificacion;
     private boolean estado;
+    private String justificacionRechazo;
 
     public LevantamientoRequisitos(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo, Curso cursoALevantar, String justificacion, boolean estado){
 
@@ -44,8 +46,9 @@ class LevantamientoRequisitos extends TramitesEstudiantiles{
         this.cursoALevantar = cursoALevantar;
         this.justificacion = justificacion;
         this.estado = estado;
-
+        this.justificacionRechazo = null;
     }
+
 
     public Curso getCursoALevantar() {
         return cursoALevantar;
@@ -63,6 +66,13 @@ class LevantamientoRequisitos extends TramitesEstudiantiles{
         this.justificacion = justificacion;
     }
 
+    public String getJustificacionRechazo() {
+        return justificacionRechazo;
+    }
+
+    public void setJustificacionRechazo(String justificacionRechazo) {
+        this.justificacionRechazo = justificacionRechazo;
+    }
 
     public Boolean getEstado(){
         return estado;
@@ -72,18 +82,33 @@ class LevantamientoRequisitos extends TramitesEstudiantiles{
         this.estado = estado;
     }
 
+    public String imprimirEstado(){
+        if(estado){
+            return "Aprobado";
+        }else{
+            return "Reprobado";
+        }
+    }
+    public String toString(){
+            if(estado){
+                return "\n| Tramite Levantamiento de Requisitos |\nEstudiante Asociado al tramite: "+estudiante.nombre+"\nFecha del Registro: "+fechaRegistro.getDate()+"/"+fechaRegistro.getMonth()+"/"+fechaRegistro.getYear()+"\nDetalle Descriptivo: "+detalleDescriptivo+"\nCurso A Levantar Requisitos: "+cursoALevantar.getNombre()+"\nJustificacion: "+justificacion+"\nEstado: "+imprimirEstado()+"\n";
+            }
+            else{
+                return "\n| Tramite Levantamiento de Requisitos |\nEstudiante Asociado al tramite: "+estudiante.nombre+"\nFecha del Registro: "+fechaRegistro.getDate()+"/"+fechaRegistro.getMonth()+"/"+fechaRegistro.getYear()+"\nDetalle Descriptivo: "+detalleDescriptivo+"\nCurso A Levantar Requisitos: "+cursoALevantar.getNombre()+"\nJustificacion: "+justificacion+"\nEstado: "+imprimirEstado()+"\nJustificacion Rechazo: "+justificacionRechazo;
+            }
+        }
 }
 
 class LevantamientoRN extends TramitesEstudiantiles{
     private Curso cursoRN;
-    private Curso cursoAMatricular;
+    private ArrayList<Curso> cursosAMatricular;
     private boolean estado;
 
 
-    public LevantamientoRN(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo,Curso cursoRN, Curso cursoAMatricular, boolean estado){
+    public LevantamientoRN(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo,Curso cursoRN, ArrayList<Curso> cursosAMatricular, boolean estado){
         super(estudiante,fechaRegistro,detalleDescriptivo);
         this.cursoRN = cursoRN;
-        this.cursoAMatricular = cursoAMatricular;
+        this.cursosAMatricular = cursosAMatricular;
         this.estado = estado;
     }
 
@@ -93,18 +118,43 @@ class LevantamientoRN extends TramitesEstudiantiles{
     public void setCursoRN(Curso cursoRN) {
         this.cursoRN = cursoRN;
     }
-    public Curso getCursoAMatricular() {
-        return cursoAMatricular;
+    public ArrayList<Curso> getCursosAMatricular() {
+        return cursosAMatricular;
     }
-    public void setCursoAMatricular(Curso cursoAMatricular) {
-        this.cursoAMatricular = cursoAMatricular;
+    public void agregarCursoAMatricular(Curso cursoAMatricular) {
+        this.cursosAMatricular.add(cursoAMatricular);
     }
+    
     public Boolean getEstado(){
         return estado;
     }
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public String imprimirEstado(){
+        if(estado){
+            return "Aprobado";
+        }else{
+            return "Reprobado";
+        }
+    }
+
+    public String imprimirCursosAMatricular()
+    {
+        String cadena = "";
+        if(cursosAMatricular.size()!=0)
+        {
+            for (Curso curso : cursosAMatricular) {
+                cadena+="["+curso.getNombre()+"] ";
+            }
+        }
+        return cadena;
+    }
+
+    public String toString(){
+        return "\n| Tramite Levantamiento RN |\nEstudiante Asociado al tramite: "+estudiante.nombre+"\nFecha del Registro: "+fechaRegistro.getDate()+"/"+fechaRegistro.getMonth()+"/"+fechaRegistro.getYear()+"\nDetalle Descriptivo: "+detalleDescriptivo+"\nCurso Levantamiento RN: "+cursoRN.getNombre()+"\nCursos a Matricular: "+imprimirCursosAMatricular()+"\nEstado: "+imprimirEstado()+"\n";
     }
 }
 
@@ -147,5 +197,10 @@ class SolicitudBeca extends TramitesEstudiantiles{
     }
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    public String toString(){
+        System.out.println();
+        return "\n| Tramite Solicitud de Beca |\nEstudiante Asociado al tramite: "+estudiante.nombre+"\nFecha del Registro: "+fechaRegistro.getDate()+"/"+fechaRegistro.getMonth()+"/"+fechaRegistro.getYear()+"\nDetalle Descriptivo: "+detalleDescriptivo+"\nPeriodo de Beca: "+periodoBeca+"\nTipo de Beca: "+tipoBeca+"\nFecha Inicio: "+fechaInicio.getDate()+"/"+fechaInicio.getMonth()+"/"+fechaInicio.getYear()+"\nFecha Final: "+fechaFin.getDate()+"/"+fechaFin.getMonth()+"/"+fechaFin.getYear()+"\n";
     }
 }

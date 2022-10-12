@@ -13,6 +13,7 @@ public class Principal {
     public static ArrayList<Profesor> listaProfesores = new ArrayList<Profesor>();
     public static ArrayList<Estudiante> listaEstudiantes = new ArrayList<Estudiante>();
     public static ArrayList<Grupo> listaGrupos = new ArrayList<Grupo>();
+    public static ArrayList<TramitesEstudiantiles> listaTramites = new ArrayList<TramitesEstudiantiles>();
 
     public static boolean permisosUsuarios;
     public static Profesor profesorLogeado;
@@ -511,7 +512,7 @@ public class Principal {
                                 in.nextLine();
                             }
 
-                        }else if(opcion.equals("8")){
+                        } else if (opcion.equals("8")) {
                             f.limpiarConsola();
                             System.out.println("=== Realizando Matricula..... ===");
                             System.out.print("Carnet del Estudiante: ");
@@ -520,23 +521,218 @@ public class Principal {
                             String cod = in.nextLine();
                             System.out.print("Numero de Grupo: ");
                             String numGrupo = in.nextLine();
-                            Grupo g = f.buscarGrupoPorNumeroCurso(cod,Byte.parseByte(numGrupo),listaGrupos);
+                            Grupo g = f.buscarGrupoPorNumeroCurso(cod, Byte.parseByte(numGrupo), listaGrupos);
                             Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
-                            if (g != null && e != null && !(g.validarEstudiante(Integer.parseInt(carnet)))){
-                                coordinadorLogeado.asociarMatriculaEstudiante(e,g);
+                            if (g != null && e != null && !(g.validarEstudiante(Integer.parseInt(carnet)))) {
+                                coordinadorLogeado.asociarMatriculaEstudiante(e, g);
                                 System.out.println("Estudiante Matriculado Correctamente");
                                 System.out.println("Presione enter para continuar...");
                                 in.nextLine();
 
-                            }else{
+                            } else {
                                 System.out.println("No se ha podido Matricular al Estudiante");
                                 System.out.println("Presione enter para continuar...");
                                 in.nextLine();
                             }
 
-                        }else if(opcion.equals("s")){
-                            break;
+                        } else if (opcion.equals("9")) {
+                            f.limpiarConsola();
+                            System.out.println("=== Realizando Tramite Estudiantil..... ===");
 
+                            System.out.println("¿Que tramite desea realizar?: ");
+                            System.out.println("|    [1]. Levantamiento de Requisitos    |");
+                            System.out.println("|    [2]. Levantamiento RN               |");
+                            System.out.println("|    [3]. Solicitud de Beca              |");
+                            String opcionTramite = in.nextLine();
+
+                            System.out.println("Carnet del Estudiante: ");
+                            String carnet = in.nextLine();
+                            System.out.println("Fecha Registro (dd/mm/yyyy): ");
+                            String fecha = in.nextLine();
+                            System.out.println("Detalle descriptivo: ");
+                            String descripcion = in.nextLine();
+
+                            Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+
+                            Date fechaRegistro = new Date(f.obtenerFecha(fecha, "anio"), f.obtenerFecha(fecha, "mes"),
+                                    f.obtenerFecha(fecha, "dia"));
+
+                            if (opcionTramite.equals("1")) {
+                                System.out.println("Codigo del Curso a Levantar: ");
+                                String cod = in.nextLine();
+                                Curso cursoALevantar = null;
+                                boolean encontrado = false;
+
+                                for (Curso curso : listaCursos) {
+                                    if (curso.getCodigo().equals(cod)) {
+                                        cursoALevantar = curso;
+                                        encontrado = true;
+                                    }
+                                }
+                                if (!encontrado) {
+                                    System.out
+                                            .println("Lo sentimos el curso asociado al codigo " + cod + " no existe.");
+                                } else {
+                                    System.out.println("Justificacion: ");
+                                    String justificacion = in.nextLine();
+
+                                    while (true) {
+                                        System.out.println("Estado del Levantamiento de Requisitos: ");
+                                        System.out.println("|    [1]. Aprobado    |");
+                                        System.out.println("|    [2]. Reprobado   |");
+                                        String estado = in.nextLine();
+
+                                        if (estado.equals("1")) {
+                                            LevantamientoRequisitos nuevoTramite = new LevantamientoRequisitos(e,
+                                                    fechaRegistro, descripcion, cursoALevantar, justificacion, true);
+                                            listaTramites.add(nuevoTramite);
+                                            f.limpiarConsola();
+                                            System.out
+                                                    .println("El tramite se agrego exitosamente\nDatos del tramite: \n"
+                                                            + nuevoTramite.toString()
+                                                            + "\nPresione una tecla para salir");
+                                            in.nextLine();
+                                            break;
+                                        } else if (estado.equals("2")) {
+                                            LevantamientoRequisitos nuevoTramite = new LevantamientoRequisitos(e,
+                                                    fechaRegistro, descripcion, cursoALevantar, justificacion, false);
+                                            listaTramites.add(nuevoTramite);
+                                            System.out.println("Justificacion del Estado Reprobado: ");
+                                            String justificacionRechazo = in.nextLine();
+                                            nuevoTramite.setJustificacionRechazo(justificacionRechazo);
+                                            f.limpiarConsola();
+                                            System.out
+                                                    .println("El tramite se agrego exitosamente\nDatos del tramite: \n"
+                                                            + nuevoTramite.toString()
+                                                            + "\nPresione una tecla para salir");
+                                            in.nextLine();
+                                            break;
+                                        }
+                                        System.out.println("Opcion no valida. Intentalo de nuevo");
+                                    }
+                                }
+
+                            } else if (opcionTramite.equals("2")) {
+                                // AQUI VA EL SEGUNDO TRAMITE
+
+                                System.out.println("Codigo del Curso Asociado al estado RN: ");
+                                String cod = in.nextLine();
+
+                                ArrayList<Curso> cursosAMatricular = new ArrayList<Curso>();
+                                Curso c = null;
+                                while (true) {
+                                    System.out.println("Codigo del Curso A Matricular: ");
+                                    String codigo = in.nextLine();
+                                    boolean encontrado = false;
+                                    for (Curso curso : listaCursos) {
+                                        if (curso.getCodigo().equals(codigo)) {
+                                            c = curso;
+                                            cursosAMatricular.add(c);
+                                            encontrado = true;
+                                        }
+                                    }
+                                    if (encontrado) {
+                                        System.out.println("El curso " + c.getNombre() + " fue agregado exitosamente");
+                                    } else {
+                                        System.out.println(
+                                                "El curso asociado al codigo " + codigo + " no ha sido encontrado.");
+                                    }
+
+                                    System.out.println("Desea agregar otro curso: ");
+                                    System.out.println("|    [1]. Si    |");
+                                    System.out.println("|    [2]. No    |");
+                                    if (in.nextLine().equals("2")) {
+                                        break;
+                                    }
+                                }
+                                String estado = "";
+                                while (true) {
+                                    System.out.println("Estado del Levantamiento de Requisitos: ");
+                                    System.out.println("|    [1]. Aprobado    |");
+                                    System.out.println("|    [2]. Reprobado   |");
+                                    estado = in.nextLine();
+                                    if (estado.equals("1") || (estado.equals("2"))) {
+                                        break;
+                                    }
+                                }
+
+                                if (estado.equals("1")) {
+                                    LevantamientoRN nuevoTramite = new LevantamientoRN(e, fechaRegistro, descripcion, c,
+                                            cursosAMatricular, true);
+                                    listaTramites.add(nuevoTramite);
+                                    f.limpiarConsola();
+                                    System.out.println("El tramite se agrego exitosamente\nDatos del tramite: \n"
+                                            + nuevoTramite.toString() + "\nPresione una tecla para salir");
+                                    in.nextLine();
+                                } else if (estado.equals("2")) {
+                                    LevantamientoRN nuevoTramite = new LevantamientoRN(e, fechaRegistro, descripcion, c,
+                                            cursosAMatricular, false);
+                                    listaTramites.add(nuevoTramite);
+                                    f.limpiarConsola();
+                                    System.out.println("El tramite se agrego exitosamente\nDatos del tramite: \n"
+                                            + nuevoTramite.toString() + "\nPresione una tecla para salir");
+                                    in.nextLine();
+                                }
+
+                            } else if (opcionTramite.equals("3")) {
+                                System.out.println("Ingrese el periodo de Beca: ");
+                                String periodoBeca = in.nextLine();
+                                System.out.println("Ingrese el tipo de Beca: ");
+                                String tipoBeca = in.nextLine();
+                                System.out.println("Fecha Inicio (dd/mm/yyyy): ");
+                                String fecha1 = in.nextLine();
+                                System.out.println("Fecha Inicio (dd/mm/yyyy): ");
+                                String fecha2 = in.nextLine();
+
+                                Date fechaInicio = new Date(f.obtenerFecha(fecha1, "anio"),
+                                        f.obtenerFecha(fecha1, "mes"),
+                                        f.obtenerFecha(fecha1, "dia"));
+                                Date fechaFin = new Date(f.obtenerFecha(fecha2, "anio"), f.obtenerFecha(fecha2, "mes"),
+                                        f.obtenerFecha(fecha2, "dia"));
+
+                                SolicitudBeca nuevoTramite = new SolicitudBeca(e, fechaRegistro, descripcion,
+                                        periodoBeca, tipoBeca, fechaInicio, fechaFin);
+                                listaTramites.add(nuevoTramite);
+                                f.limpiarConsola();
+                                System.out.println("El tramite se agrego exitosamente\nDatos del tramite: \n"
+                                        + nuevoTramite.toString() + "\nPresione una tecla para salir");
+                                in.nextLine();
+                            }
+
+                            /*
+                             * if (g != null && e != null &&
+                             * !(g.validarEstudiante(Integer.parseInt(carnet)))){
+                             * coordinadorLogeado.asociarMatriculaEstudiante(e,g);
+                             * System.out.println("Estudiante Matriculado Correctamente");
+                             * System.out.println("Presione enter para continuar...");
+                             * in.nextLine();
+                             * 
+                             * }else{
+                             * System.out.println("No se ha podido Matricular al Estudiante");
+                             * System.out.println("Presione enter para continuar...");
+                             * in.nextLine();
+                             * }
+                             */
+                        } else if (opcion.equals("10")){
+                            f.limpiarConsola();
+                            System.out.println("=== Mostrando los tramites actuales..... ===");
+
+                            if(listaTramites.size()==0)
+                            {
+                                System.out.println("Aun no existen tramites estudiantiles creados.");
+                            }else
+                            {
+                                byte contador = 1;
+                                for (TramitesEstudiantiles tramite : listaTramites) {
+                                    System.out.println(contador+". "+tramite.toString());
+                                    contador++;
+                                }
+                            }
+                            System.out.print("Presione enter para continuar.....");
+                            in.nextLine();
+
+                        }else if (opcion.equals("s")) {
+                            break;
                         }
 
                     }
@@ -563,27 +759,26 @@ public class Principal {
                             String cod = in.nextLine();
                             System.out.println("Numero de Grupo: ");
                             String numGrupo = in.nextLine();
-                            Grupo g = f.buscarGrupoPorNumeroCurso(cod,Byte.parseByte(numGrupo),listaGrupos);
-                            
-                            if(g.validarProfesor(profesorLogeado.getNombre())){
+                            Grupo g = f.buscarGrupoPorNumeroCurso(cod, Byte.parseByte(numGrupo), listaGrupos);
+
+                            if (g.validarProfesor(profesorLogeado.getNombre())) {
                                 System.out.print("Carnet del Estudiante: ");
                                 String carnet = in.nextLine();
                                 Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
                                 System.out.print("Nota: ");
                                 String nota = in.nextLine();
 
-                                if(g.validarEstudiante(Integer.parseInt(carnet))){
+                                if (g.validarEstudiante(Integer.parseInt(carnet))) {
                                     profesorLogeado.registrarCalificacion(e, g, Float.parseFloat(nota));
                                     System.out.println("Calificacion Agregada Correctamente");
                                     e.imprimirCalifaciones();
                                     System.out.println("Presione enter para continuar...");
                                     in.nextLine();
-                                }else{
+                                } else {
                                     System.out.println("El estudiante no esta matriculado en este curso");
                                 }
-                                
 
-                            }else{
+                            } else {
                                 System.out.println("No tienes los permisos suficientes para asignar la nota");
                                 System.out.println("Presione enter para continuar...");
                                 in.nextLine();
@@ -601,12 +796,12 @@ public class Principal {
                             String carnet = in.nextLine();
 
                             Date fechaOb = new Date(f.obtenerFecha(fecha, "anio"), f.obtenerFecha(fecha, "mes"),
-                            f.obtenerFecha(fecha, "dia"));
+                                    f.obtenerFecha(fecha, "dia"));
 
                             Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
 
-                            if( e != null){
-                                profesorLogeado.setAcompanamiento(e,fechaOb,tipo,notaDescriptiva);
+                            if (e != null) {
+                                profesorLogeado.setAcompanamiento(e, fechaOb, tipo, notaDescriptiva);
 
                                 System.out.println("======== Registro Completado ========");
                                 System.out.println("Presione enter para continuar...");
@@ -614,13 +809,11 @@ public class Principal {
 
                             }
 
-
-
                         } else if (opcion.equals("3")) {
 
                         } else if (opcion.equals("4")) {
 
-                        } 
+                        }
                     }
                 }
             } else {
