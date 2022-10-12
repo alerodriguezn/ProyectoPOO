@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.Date;
 
+
+/**
+ * Describe los datos del Coordinador, extiende de la clase Usuario
+ */
 public class Coordinador extends Usuario{
     
     public Coordinador(String nombre,String telefono, String correo, String usuario, String contrasena){
@@ -45,16 +49,31 @@ public class Coordinador extends Usuario{
         
     }
 
-    /*
-     * Funcion que registra un nuevo estudiante
+    /**
+     * Funcion que registra un estudiante
+     * @param nombre Nombre del Estudiante
+     * @param carnet Carnet del Estudiante
+     * @param correo Correo del Estudiante
+     * @param fechaNacimiento Fecha de nacimiento
+     * @param edad Edad del estudiante
+     * @param genero Genero del estudiante
+     * @param lugarProcedencia Procedencia del estudiante
      */
     public void registrarEstudiante(String nombreCompleto, int carnet, String correo, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia)
     {        
         p.listaEstudiantes.add(new Estudiante(nombreCompleto, carnet, correo, fechaNacimiento, edad, genero, lugarProcedencia));
     }
 
-    /*
+    /**
      * Funcion que actualiza datos del estudiante
+     * @param e Instancia de Estudiante
+     * @param nombre Nombre del Estudiante
+     * @param carnet Carnet del Estudiante
+     * @param correo Correo del Estudiante
+     * @param fechaNacimiento Fecha de nacimiento
+     * @param edad Edad del estudiante
+     * @param genero Genero del estudiante
+     * @param lugarProcedencia Procedencia del estudiante
      */
     public void actualizarEstudiante(Estudiante e,String nombre, String correo, int carnet, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia)
     {
@@ -69,8 +88,13 @@ public class Coordinador extends Usuario{
         
     }
 
-    /*
-     * Funcion que ingresa un nuevo curso
+    /**
+     * Funcion que registra un curso
+     * @param codigo Codigo del curso
+     * @param nombre Nombre del curso
+     * @param creditos Creditos
+     * @param cantidadHorasLectivas Horas lectivas
+     * 
      */
     public void registrarCurso(String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
     {
@@ -78,8 +102,14 @@ public class Coordinador extends Usuario{
     }
 
 
-    /*
+    /**
      * Funcion que actualiza un curso
+     * @param c Instancia de curso a actualizar
+     * @param codigo Codigo del curso
+     * @param nombre Nombre del curso
+     * @param creditos Creditos
+     * @param cantidadHorasLectivas Horas lectivas
+     * 
      */
     public void actualizarCurso(Curso c,String codigo, String nombre, byte creditos, byte cantidadHorasLectivas)
     {
@@ -89,8 +119,16 @@ public class Coordinador extends Usuario{
         c.setCantidadHorasLectivas(cantidadHorasLectivas);
     }
     
-    /*
-     * Funcion que ingresa un nuevo grupo
+    /**
+     * Funcion ingresa un nuevo grupo presencial
+     * @param horario Horario de grupo
+     * @param profesor Profesor asignado
+     * @param numeroGrupo Numero del grupo
+     * @param fechaInicio Fecha en que inicia
+     * @param fechaFinalizacion Fecha en que finaliza
+     * @param curso Curso
+     * @param aula numero de aula
+     * 
      */
     public void registrarGrupoPresencial(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, int aula)
     {
@@ -99,12 +137,33 @@ public class Coordinador extends Usuario{
         profesor.setGrupo(g);
     }
 
+     /**
+     * Funcion ingresa un nuevo grupo Virtual-Asincronico
+     * @param profesor Profesor asignado
+     * @param numeroGrupo Numero del grupo
+     * @param fechaInicio Fecha en que inicia
+     * @param fechaFinalizacion Fecha en que finaliza
+     * @param curso Curso
+     * @param plataforma Plataforma(Zoom,Teams)
+     * 
+     */
     public void registrarGrupoVA(Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma){
         Grupo g = new Grupo(profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma);
         p.listaGrupos.add(g);
         profesor.setGrupo(g);
     }
 
+     /**
+     * Funcion ingresa un nuevo grupo Virtual-Sincronico
+     * @param horario Horario de grupo
+     * @param profesor Profesor asignado
+     * @param numeroGrupo Numero del grupo
+     * @param fechaInicio Fecha en que inicia
+     * @param fechaFinalizacion Fecha en que finaliza
+     * @param curso Curso
+     * @param plataforma Plataforma(Zoom,Teams)
+     * 
+     */
     public void registrarGrupoVS(String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma){
         Grupo g = new Grupo(horario, profesor, numeroGrupo, fechaInicio, fechaFinalizacion, curso, plataforma);
         p.listaGrupos.add(g);
@@ -112,8 +171,17 @@ public class Coordinador extends Usuario{
     }
 
 
-    /*
-     * Funcion que actualiza un curso
+   /**
+     * Funcion que actualiza un grupo presencial
+     * @param g Grupo a actualizar
+     * @param horario Horario de grupo
+     * @param profesor Profesor asignado
+     * @param numeroGrupo Numero del grupo
+     * @param fechaInicio Fecha en que inicia
+     * @param fechaFinalizacion Fecha en que finaliza
+     * @param curso Curso
+     * @param aula numero de aula
+     * 
      */
     public void actualizarGrupoPresencial(Grupo g, String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, int aula)
     {
@@ -125,6 +193,18 @@ public class Coordinador extends Usuario{
         g.setCurso(curso);
         g.setAula(aula);
     }
+
+    /**
+     * Funcion ingresa un nuevo grupo Virtual-Asincronico
+     * @param g Grupo a actualizar
+     * @param profesor Profesor asignado
+     * @param numeroGrupo Numero del grupo
+     * @param fechaInicio Fecha en que inicia
+     * @param fechaFinalizacion Fecha en que finaliza
+     * @param curso Curso
+     * @param plataforma Plataforma(Zoom,Teams)
+     * 
+     */
     public void actualizarGrupoVA(Grupo g, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma)
     {
         g.setProfesor(profesor);
@@ -135,6 +215,18 @@ public class Coordinador extends Usuario{
         g.setPlataforma(plataforma);
     }
 
+    /**
+     * Funcion ingresa un nuevo grupo Virtual-Sincronico
+     * @param g Grupo a actualizar
+     * @param horario Horario de grupo
+     * @param profesor Profesor asignado
+     * @param numeroGrupo Numero del grupo
+     * @param fechaInicio Fecha en que inicia
+     * @param fechaFinalizacion Fecha en que finaliza
+     * @param curso Curso
+     * @param plataforma Plataforma(Zoom,Teams)
+     * 
+     */
     public void actualizarGrupoVS(Grupo g, String horario, Profesor profesor, byte numeroGrupo, Date fechaInicio, Date fechaFinalizacion, Curso curso, String plataforma)
     {
         g.setHorario(horario);
@@ -147,8 +239,10 @@ public class Coordinador extends Usuario{
     }
 
 
-    /*
+    /**
      * Funcion que asocia al estudiante con un grupo y viceversa
+     * @param e Estudiante a matricular
+     * @param g Grupo en el que se va a matricular
      */
     public void asociarMatriculaEstudiante(Estudiante e, Grupo g)
     {

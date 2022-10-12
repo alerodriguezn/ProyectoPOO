@@ -18,6 +18,9 @@ public class Profesor extends Usuario{
         return this.listaGrupos;
     }
 
+    /**
+     * Funcion que imprime los grupos de un profesor
+     */
     public void imprimirGrupos(){
         for (Grupo g : this.listaGrupos) {
             System.out.println("Numero de Grupo: "+g.getNumeroGrupo() +" | Nombre del Curso: " +g.getCurso().getNombre());
