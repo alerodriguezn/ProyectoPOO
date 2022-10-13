@@ -30,6 +30,16 @@ public class Calificacion {
     }
 
     /**
+     * Funcion que devuelve la nota redondeada
+     * @return Retorna la nota redondeada
+     */
+    public float getNotaRedondeada() {
+        return Math.round((nota/5))*5 ;
+    }
+
+
+
+    /**
      * Funcion que devuelve el grupo
      * @return Retorna el grupo
      */

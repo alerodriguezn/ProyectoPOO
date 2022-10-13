@@ -58,6 +58,8 @@ public class Principal {
 
     public static void main(String[] args) {
 
+        
+
         cargarDatos();
 
         funciones f = new funciones(); // Archivo con funciones.
@@ -824,7 +826,7 @@ public class Principal {
                             Grupo g = f.buscarGrupoPorNumeroCurso(cod, Byte.parseByte(grupo) ,listaGrupos);
                             Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
 
-                            if( e != null && g != null && g.validarProfesor(profesorLogeado.getNombre()) && g.validarEstudiante(Integer.parseInt(carnet))){
+                            if( e != null && g != null && g.validarProfesor(profesorLogeado.getNombre()) ){
                                 profesorLogeado.setTutoria(Integer.parseInt(id),e, g);
                                 Tutorias t = profesorLogeado.buscarTutoria(Integer.parseInt(id));
                                 while(true){

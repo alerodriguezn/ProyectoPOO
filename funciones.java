@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class funciones {
@@ -142,6 +143,9 @@ public class funciones {
         }
     }
 
+
+
+
     /**
      * Funcion que imprime las lista global de estudiantes
      * 
@@ -267,5 +271,19 @@ public class funciones {
         }
 
     }
+
+    public boolean calcularFechaMayor(Date fecha1, Date fecha2)
+    {
+    if (fecha1.getYear() > fecha2.getYear())
+        return true;
+    if ((fecha1.getYear() == fecha2.getYear()) && (fecha1.getMonth() > fecha2.getMonth()))
+        return true;
+    if ((fecha1.getYear() == fecha2.getYear()) && (fecha1.getMonth() >= fecha2.getMonth()) && (fecha1.getDay() >= fecha2.getDay()))
+        return true;
+    return false;
+    }
+
+    
+
 
 }
