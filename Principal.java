@@ -717,22 +717,29 @@ public class Principal {
                              */
                         } else if (opcion.equals("10")){
                             f.limpiarConsola();
-                            System.out.println("=== Mostrando los tramites actuales..... ===");
-
-                            if(listaTramites.size()==0)
-                            {
-                                System.out.println("Aun no existen tramites estudiantiles creados.");
-                            }else
-                            {
-                                byte contador = 1;
-                                for (TramitesEstudiantiles tramite : listaTramites) {
-                                    System.out.println(contador+". "+tramite.toString());
-                                    contador++;
-                                }
+                            f.menuCoordinadorReportes();
+                            String opcionReporte = in.nextLine();
+                            if (opcionReporte.equals("1")) {
+                                System.out.println("Reporte 1\nPresiona cualquir tecla para volver al menu principal");
+                                in.nextLine();
                             }
-                            System.out.print("Presione enter para continuar.....");
-                            in.nextLine();
-
+                            else if (opcionReporte.equals("2")) {
+                                System.out.println("Reporte 2\nPresiona cualquir tecla para volver al menu principal");
+                                in.nextLine();
+                            }
+                            else if (opcionReporte.equals("3")) {
+                                System.out.println("Reporte 3\nPresiona cualquir tecla para volver al menu principal");
+                                in.nextLine();
+                            }
+                            else if (opcionReporte.equals("s")) {
+                                System.out.println("Volviendo al menu principal...");
+                            }
+                            else
+                            {
+                                System.out.println("Opcion no valida. Presiona cualquier tecla para volver al menu principal");
+                            }
+                            
+                            
                         }else if (opcion.equals("s")) {
                             break;
                         }
@@ -854,7 +861,28 @@ public class Principal {
                             }
 
                         } else if (opcion.equals("4")) {
-
+                            
+                        }
+                        else if(opcion.equals("5"))
+                        {
+                            f.limpiarConsola();
+                            f.menuProfesorReportes();
+                            String opcionReporte = in.nextLine();
+                            if (opcionReporte.equals("1")) {
+                                System.out.println("Reporte 1\nPresiona cualquir tecla para volver al menu principal");
+                                in.nextLine();
+                            }
+                            else if (opcionReporte.equals("2")) {
+                                System.out.println("Reporte 2\nPresiona cualquir tecla para volver al menu principal");
+                                in.nextLine();
+                            }
+                            else if (opcionReporte.equals("s")) {
+                                System.out.println("Volviendo al menu principal...");
+                            }
+                            else
+                            {
+                                System.out.println("Opcion no valida. Presiona cualquier tecla para volver al menu principal");
+                            }
                         }
                     }
                 }

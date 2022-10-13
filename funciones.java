@@ -40,7 +40,18 @@ public class funciones {
         System.out.println("|    [7]. Editar Grupo                           |");
         System.out.println("|    [8]. Matricula-Asociacion Estudiante/Curso  |");
         System.out.println("|    [9]. Registro de Tramites Estudiantiles     |");
-        System.out.println("|    [10]. Ver los Tramites Estudiantiles        |");
+        System.out.println("|    [10]. Menu de Reportes                      |");
+        System.out.println("|    [s]. Atras                                  |");
+        System.out.println("--------------------------------------------------");
+    }
+
+    public void menuCoordinadorReportes() {
+        limpiarConsola();
+        System.out.println("--------------------------------------------------");
+        System.out.println("|          Menu Coordinador - Reportes           |");
+        System.out.println("|    [1]. Ver Historial Academico                |");
+        System.out.println("|    [2]. Reporte de RN                          |");
+        System.out.println("|    [3]. Reporte Levantamiento de Requisitos    |");
         System.out.println("|    [s]. Atras                                  |");
         System.out.println("--------------------------------------------------");
     }
@@ -53,9 +64,20 @@ public class funciones {
         System.out.println("|    [2]. Acompanamiento en Curso                |");
         System.out.println("|    [3]. Registrar nueva tutoria                |");
         System.out.println("|    [4]. Agregar sesion de tutoria y asistencia |");
+        System.out.println("|    [5]. Menu de Reportes                       |");
         System.out.println("|    [s]. Atras                                  |");
         System.out.println("--------------------------------------------------");
 
+    }
+
+    public void menuProfesorReportes() {
+        limpiarConsola();
+        System.out.println("--------------------------------------------------");
+        System.out.println("|           Menu Profesor - Reportes             |");
+        System.out.println("|    [1]. Reporte de RN                          |");
+        System.out.println("|    [2]. Reporte Levantamiento de Requisitos    |");
+        System.out.println("|    [s]. Atras                                  |");
+        System.out.println("--------------------------------------------------");
     }
 
     /**
@@ -142,9 +164,6 @@ public class funciones {
                     .concat(String.valueOf(fecha.charAt(8))).concat(String.valueOf(fecha.charAt(9))));
         }
     }
-
-
-
 
     /**
      * Funcion que imprime las lista global de estudiantes
