@@ -45,6 +45,9 @@ public class funciones {
         System.out.println("--------------------------------------------------");
     }
 
+    /**
+     * Funcion que despliega el menu de los reportes del coordinador
+     */
     public void menuCoordinadorReportes() {
         limpiarConsola();
         System.out.println("--------------------------------------------------");
@@ -56,6 +59,9 @@ public class funciones {
         System.out.println("--------------------------------------------------");
     }
 
+    /**
+     * Funcion que despliega el menu del profesor
+     */
     public void menuProfesor() {
         limpiarConsola();
         System.out.println("--------------------------------------------------");
@@ -70,6 +76,9 @@ public class funciones {
 
     }
 
+    /**
+     * Funcion que despliega el menu de los reportes del profesor
+     */
     public void menuProfesorReportes() {
         limpiarConsola();
         System.out.println("--------------------------------------------------");
