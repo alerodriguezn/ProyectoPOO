@@ -50,7 +50,8 @@ public class funciones {
         System.out.println("|                Menu Profesor                   |");
         System.out.println("|    [1]. Registrar Calificaciones               |");
         System.out.println("|    [2]. Acompanamiento en Curso                |");
-        System.out.println("|    [3]. Sesiones de tutoria y asistencia       |");
+        System.out.println("|    [3]. Registrar nueva tutoria                |");
+        System.out.println("|    [4]. Agregar sesion de tutoria y asistencia |");
         System.out.println("|    [s]. Atras                                  |");
         System.out.println("--------------------------------------------------");
 

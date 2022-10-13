@@ -811,6 +811,46 @@ public class Principal {
 
                         } else if (opcion.equals("3")) {
 
+                            System.out.println("=== Registrando Tutoria..... ===");
+                            System.out.println("Codigo del curso: ");
+                            String cod = in.nextLine();
+                            System.out.println("Numero del grupo: ");
+                            String grupo = in.nextLine();
+                            System.out.println("Carnet Estudiante Tutor: ");
+                            String carnet = in.nextLine();
+                            System.out.println("ID de la tutoria: ");
+                            String id = in.nextLine();
+                            
+                            Grupo g = f.buscarGrupoPorNumeroCurso(cod, Byte.parseByte(grupo) ,listaGrupos);
+                            Estudiante e = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+
+                            if( e != null && g != null && g.validarProfesor(profesorLogeado.getNombre()) && g.validarEstudiante(Integer.parseInt(carnet))){
+                                profesorLogeado.setTutoria(Integer.parseInt(id),e, g);
+                                Tutorias t = profesorLogeado.buscarTutoria(Integer.parseInt(id));
+                                while(true){
+                                    System.out.println("Desea agregar una sesion(s/n): ");
+                                    String op = in.nextLine();
+                                    if(op.equals("s")){
+                                        
+                                        System.out.println("Fecha Tutoria: ");
+                                        String fecha = in.nextLine();
+                                        System.out.println("Numero de asistentes: ");
+                                        String asis = in.nextLine();
+                                        t.setListaSesiones("Fecha: "+fecha+" | Numero de Asistentes: "+asis);
+                                    }else{
+                                        f.limpiarConsola();
+                                        System.out.println(" === Lista de Sesiones ===");
+                                        t.imprimirListaTutorias();
+                                        System.out.println("Presione enter para continuar...");
+                                        in.nextLine();
+                                        break;
+                                    }
+                                }
+
+                            }else{
+                                System.out.println("No se ha encontrado al estudiante o al grupo");
+                            }
+
                         } else if (opcion.equals("4")) {
 
                         }
