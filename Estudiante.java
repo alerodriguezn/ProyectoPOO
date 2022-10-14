@@ -16,6 +16,7 @@ public class Estudiante extends Usuario{
     private ArrayList<AcompanamientoCurso> listaAC;
 
 
+
     public Estudiante(String nombreCompleto, int carnet, String correo, Date fechaNacimiento, byte edad, String genero, String lugarProcedencia){
 
         super(nombreCompleto, correo);

@@ -972,6 +972,36 @@ public class Principal {
                             f.menuProfesorReportes();
                             String opcionReporte = in.nextLine();
                             if (opcionReporte.equals("1")) {
+
+                                f.limpiarConsola();
+                                System.out.println(" ========= Reporte RN ============ ");
+                                System.out.println("Ingrese el codigo del Curso: ");
+                                String codigo = in.nextLine();
+                                System.out.println("Ingrese el numero del Grupo: ");
+                                String numGrupo = in.nextLine();
+                                System.out.println("Fecha Actual (Comprobar si el curso esta activo dd/mm/yyyy): ");
+                                String fecha = in.nextLine();
+
+                                int dia = f.obtenerFecha(fecha, "dia");
+                                int mes = f.obtenerFecha(fecha, "mes");
+                                int anio = f.obtenerFecha(fecha, "anio");
+                                Date fechaD = new Date(anio,mes,dia);
+
+                                Grupo grupoEncontrado = f.buscarGrupoPorNumeroCurso(codigo, (byte) Integer.parseInt(numGrupo), listaGrupos);
+                                if(grupoEncontrado.validarProfesor(profesorLogeado.getNombre()) && (f.calcularFechaMayor(fechaD,grupoEncontrado.getFechaInicio())) && (f.calcularFechaMayor(grupoEncontrado.getFechaFinalizacion(),fechaD)) ){
+                                    ArrayList<Estudiante> estudiantesGrupo = new ArrayList<Estudiante>();
+                                    estudiantesGrupo =  grupoEncontrado.getEstudiantes();
+                                    for (Estudiante estudiante : estudiantesGrupo) {
+                                        for (TramitesEstudiantiles tramite : listaTramites) {
+                                            if (tramite.estudiante == estudiante) {
+                                                System.out.println(tramite.toString());;
+                                            }
+                                        }
+                                    }
+
+                                }
+                        
+                               
                                 System.out.println("\nPresiona cualquir tecla para volver al menu principal");
                                 in.nextLine();
                             }
