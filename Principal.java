@@ -54,6 +54,8 @@ public class Principal {
         listaGrupos.add(g2);
         listaProfesores.add(us3);
 
+
+
     }
 
     public static void main(String[] args) {
@@ -724,11 +726,50 @@ public class Principal {
                                 in.nextLine();
                             }
                             else if (opcionReporte.equals("2")) {
-                                System.out.println("Reporte 2\nPresiona cualquir tecla para volver al menu principal");
+                                
+                                f.limpiarConsola();
+                                System.out.println("Ingrese el carnet del estudiante");
+                                String carnet = in.nextLine();
+                                Estudiante estudiante = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+                                boolean datosEncontrados = false;
+
+                                System.out.println("=== CARGANDO DATOS DEL REPORTE DE RN..... ===");
+
+                                for (TramitesEstudiantiles tramite : listaTramites) {
+
+                                    if(tramite.estudiante == estudiante){
+                                        System.out.println(tramite.toString());;
+                                        datosEncontrados = true;
+                                    }
+                                    
+                                }
+                                if(!datosEncontrados){
+                                
+                                }
+                                System.out.println("Presiona cualquir tecla para volver al menu principal");
                                 in.nextLine();
                             }
                             else if (opcionReporte.equals("3")) {
-                                System.out.println("Reporte 3\nPresiona cualquir tecla para volver al menu principal");
+                                f.limpiarConsola();
+                                System.out.println("Ingrese el carnet del estudiante");
+                                String carnet = in.nextLine();
+                                Estudiante estudiante = f.buscarEstudiantePorCarnet(Integer.parseInt(carnet), listaEstudiantes);
+                                boolean datosEncontrados = false;
+
+                                System.out.println("=== CARGANDO DATOS DE LEVANTAMIENTO DE REQUISITO..... ===");
+
+                                for (TramitesEstudiantiles tramite : listaTramites) {
+
+                                    if(tramite.estudiante == estudiante){
+                                        System.out.println(tramite.toString());;
+                                        datosEncontrados = true;
+                                    }
+                                    
+                                }
+                                if(!datosEncontrados){
+                                    System.out.println("* No existen levantamientos de requisitos asociados al estudiante "+estudiante.getNombre()+" *");
+                                }
+                                System.out.println("Presiona cualquir tecla para volver al menu principal");
                                 in.nextLine();
                             }
                             else if (opcionReporte.equals("s")) {
@@ -873,7 +914,46 @@ public class Principal {
                                 in.nextLine();
                             }
                             else if (opcionReporte.equals("2")) {
-                                System.out.println("Reporte 2\nPresiona cualquir tecla para volver al menu principal");
+
+                                // Reporte de levantamiento de requisitos, basado en la selección de uno de los cursos activos a cargo, 
+                                // se listan los estudiantes a los que se les aplicara levantamiento de requisitos, detallando el 
+                                // curso requisito que se levantó y los motivos que lo justificaron.
+
+                                System.out.println("Ingrese el codigo del Curso: ");
+                                String codigo = in.nextLine();
+                                System.out.println("Ingrese el numero del Grupo: ");
+                                String numGrupo = in.nextLine();
+                                
+                                Grupo grupoEncontrado = f.buscarGrupoPorNumeroCurso(codigo, (byte) Integer.parseInt(numGrupo), listaGrupos);
+                                while(grupoEncontrado==null){
+                                    System.out.println("Error, codigo o numero del grupo incorrectos o inexistentes. Presiona cualquier tecla para intentar de nuevo");
+                                    in.nextLine();
+                                    System.out.println("Ingrese el codigo del Curso: ");
+                                    codigo = in.nextLine();
+                                    System.out.println("Ingrese el numero del Grupo: ");
+                                    numGrupo = in.nextLine();
+                                    grupoEncontrado = f.buscarGrupoPorNumeroCurso(codigo, (byte) Integer.parseInt(numGrupo), listaGrupos);
+                                }
+
+                                boolean datosEncontrados = false;
+
+                                ArrayList<Estudiante> estudiantesGrupo = new ArrayList<Estudiante>();
+                                estudiantesGrupo =  grupoEncontrado.getEstudiantes();
+
+                                System.out.println("=== CARGANDO DATOS DEL LEVANTAMIENTO DE REQUISITOS..... ===");
+
+                                for (Estudiante estudiante : estudiantesGrupo) {
+                                    for (TramitesEstudiantiles tramite : listaTramites) {
+                                        if (tramite.estudiante == estudiante) {
+                                            System.out.println(tramite.toString());;
+                                            datosEncontrados = true;
+                                        }
+                                    }
+                                }
+                                if(!datosEncontrados){
+                                    System.out.println("No existen tramites asociados a los estudiantes de este grupo.");    
+                                }
+                                System.out.println("Presiona cualquir tecla para volver al menu principal");
                                 in.nextLine();
                             }
                             else if (opcionReporte.equals("s")) {

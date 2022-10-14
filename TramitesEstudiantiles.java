@@ -103,13 +103,14 @@ class LevantamientoRN extends TramitesEstudiantiles{
     private Curso cursoRN;
     private ArrayList<Curso> cursosAMatricular;
     private boolean estado;
-
+    private byte gradoRN;
 
     public LevantamientoRN(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo,Curso cursoRN, ArrayList<Curso> cursosAMatricular, boolean estado){
         super(estudiante,fechaRegistro,detalleDescriptivo);
         this.cursoRN = cursoRN;
         this.cursosAMatricular = cursosAMatricular;
         this.estado = estado;
+        gradoRN = 1;
     }
 
     public Curso getCursoRN() {
@@ -131,6 +132,14 @@ class LevantamientoRN extends TramitesEstudiantiles{
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public byte getGradoRN(){
+        return gradoRN;
+    }
+
+    public void setGradoRN(byte gradoRN) {
+        this.gradoRN = gradoRN;
     }
 
     public String imprimirEstado(){
