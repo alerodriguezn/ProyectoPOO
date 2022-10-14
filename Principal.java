@@ -19,6 +19,12 @@ public class Principal {
     public static Profesor profesorLogeado;
     public static Coordinador coordinadorLogeado;
 
+    public static void sorteo(ArrayList<Grupo> lista) { 
+        lista.sort((o1, o2) 
+                  -> o1.getCurso().getCodigo().compareTo( 
+                      o2.getCurso().getCodigo())); 
+    } 
+
     // Funcion para pruebas
     public static void cargarDatos() {
 
@@ -41,15 +47,23 @@ public class Principal {
         Estudiante es2 = new Estudiante("Deivid", 2022180126, "dematute@estudiantec.cr", new Date(2002, 11, 23),
                 (byte) 19, "Masculino", "Santa Clara");
 
+        Estudiante es3 = new Estudiante("Juan Ca", 123, "juanca@estudiantec.cr", new Date(2002, 11, 23),
+        (byte) 20, "Masculino", "Santa Clara");
+
         Grupo g1 = new Grupo("L-7:00-11:30", us3, (byte) 50, new Date(2022 - 1900, 2, 03), new Date(2022, 8, 10),
                 listaCursos.get(0), 17);
         Grupo g2 = new Grupo("M-12:30-16:00", us3, (byte) 50, new Date(2022 - 1900, 2, 04), new Date(2022, 8, 11),
                 listaCursos.get(1), "Zoom");
+        Grupo g3 = new Grupo("M-11:30-13:00", us3, (byte) 51, new Date(2022 - 1900, 2, 04), new Date(2022, 8, 11),
+        listaCursos.get(2), "Zoom");
 
         listaProfesores.add(us1);
         listaCoordinadores.add(us2);
         listaEstudiantes.add(es1);
         listaEstudiantes.add(es2);
+        listaEstudiantes.add(es3);
+
+        listaGrupos.add(g3);
         listaGrupos.add(g1);
         listaGrupos.add(g2);
         listaProfesores.add(us3);
@@ -722,7 +736,22 @@ public class Principal {
                             f.menuCoordinadorReportes();
                             String opcionReporte = in.nextLine();
                             if (opcionReporte.equals("1")) {
-                                System.out.println("Reporte 1\nPresiona cualquir tecla para volver al menu principal");
+                                f.limpiarConsola();
+                                System.out.println(
+                                        " ============ LISTADO DE CALIFICACIONES DE LOS CURSOS================");
+
+                                ArrayList<Grupo> tempGrupo = listaGrupos;
+
+                                sorteo(tempGrupo);
+                                System.out.println("Prueba");
+
+                                for (Grupo g : listaGrupos) {
+                                    g.reporteCalificaciones();
+                                }
+                                System.out.println(
+                                        "========================================================================");
+                                
+                                System.out.println("\nPresiona cualquir tecla para volver al menu principal");
                                 in.nextLine();
                             }
                             else if (opcionReporte.equals("2")) {
@@ -963,6 +992,8 @@ public class Principal {
                             {
                                 System.out.println("Opcion no valida. Presiona cualquier tecla para volver al menu principal");
                             }
+                        }else{
+                            break;
                         }
                     }
                 }

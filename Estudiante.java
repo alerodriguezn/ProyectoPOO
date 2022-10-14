@@ -112,6 +112,15 @@ public class Estudiante extends Usuario{
         }
     }
 
+    public float getCalificacionesPorGrupo(Grupo g) {
+        for (Calificacion c : this.calificaciones) {
+            if(c.getGrupo() == g){
+                return c.getNotaRedondeada();
+            }            
+        }
+        return 0f;
+    }
+
     public void imprimirCalifaciones(){
         for (Calificacion c : this.calificaciones) {
             System.out.println("Nota: " + String.valueOf(c.getNota()) +" | Curso: "+ c.getGrupo().getCurso().getNombre());

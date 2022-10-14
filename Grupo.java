@@ -1,5 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -147,6 +149,53 @@ public class Grupo {
     void imprimirListaEstudiantes(){
         for (Estudiante e : this.listaEstudiantes) {
             System.out.println("- Nombre: "+ e.getNombre() + "Carnet: " + e.getCarnet());
+        }
+    }
+
+
+    void reporteCalificaciones() {
+        float sumaNota = 0f;
+        float contador = 0f;
+
+        Grupo g = this;
+        ArrayList<Estudiante> lista = this.listaEstudiantes;
+
+        Collections.sort(lista, new Comparator<Estudiante>() {
+            public int compare(Estudiante p1, Estudiante p2) {
+                return Float.valueOf(p1.getCalificacionesPorGrupo(g)).compareTo(p2.getCalificacionesPorGrupo(g));
+            }
+        });
+        Collections.reverse(lista);
+        if (this.plataforma == null) {
+
+            System.out.println("Codigo: " + this.getCurso().getCodigo() + " | [PRESENCIAL] Profesor: "
+                    + this.profesor.getNombre() + " | Curso: " + this.getCurso().getNombre());
+            for (Estudiante e : lista) {
+                System.out.println("Nombre: " + e.getNombre() + " | Nota: " + e.getCalificacionesPorGrupo(this));
+                sumaNota += e.getCalificacionesPorGrupo(this);
+                contador += 1;
+            }
+            System.out.println("Promedio Ponderado: " + sumaNota / contador);
+        }
+
+        else if (this.horario == null) {
+            System.out.println("Codigo: " + this.getCurso().getCodigo() + " | [Virtual-Asincronico] Profesor: "
+                    + this.profesor.getNombre() + " | Curso: " + this.getCurso().getNombre());
+            for (Estudiante e : lista) {
+                System.out.println("Nombre: " + e.getNombre() + " | Nota: " + e.getCalificacionesPorGrupo(this));
+                sumaNota += e.getCalificacionesPorGrupo(this);
+                contador += 1;
+            }
+            System.out.println("Promedio Ponderado: " + sumaNota / contador);
+        } else {
+            System.out.println("Codigo: " + this.getCurso().getCodigo() + " | [Virtual-Sincronico] Profesor: "
+                    + this.profesor.getNombre() + " | Curso: " + this.getCurso().getNombre());
+            for (Estudiante e : lista) {
+                System.out.println("Nombre: " + e.getNombre() + " | Nota: " + e.getCalificacionesPorGrupo(this));
+                sumaNota += e.getCalificacionesPorGrupo(this);
+                contador += 1;
+            }
+            System.out.println("Promedio Ponderado: " + sumaNota / contador);
         }
     }
 
