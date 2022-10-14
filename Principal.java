@@ -21,6 +21,8 @@ public class Principal {
     public static Profesor profesorLogeado;
     public static Coordinador coordinadorLogeado;
 
+    static funciones f = new funciones(); // Archivo con funciones.
+
     /**
      * Funcion que ordena un Arraylist
      * @param lista lista a ordenar
@@ -76,17 +78,30 @@ public class Principal {
         listaGrupos.add(g2);
         listaProfesores.add(us3);
 
+        LevantamientoRequisitos nuevoTramite = new LevantamientoRequisitos(es1,new Date(f.obtenerFecha("11/03/2021", "anio"), f.obtenerFecha("11/03/2021", "mes"),
+        f.obtenerFecha("11/03/2021", "dia")), "Levantamiento Requisitos 1", listaCursos.get(0), "Motivo justificado", true);
 
+        LevantamientoRequisitos nuevoTramite2 = new LevantamientoRequisitos(es2, new Date(f.obtenerFecha("18/03/2021", "anio"), f.obtenerFecha("18/03/2021", "mes"),
+        f.obtenerFecha("18/03/2021", "dia")), "Levantamiento Requisitos 2", listaCursos.get(1), "Motivo justificado", true);
 
+        //estudiante, fechaRegistro, detalleDescriptivo, cursoRN, cursosAMatricular,  estado,  gradoRN,  periodo
+        LevantamientoRN nuevoTramite3 = new LevantamientoRN(es2, new Date(f.obtenerFecha("16/02/2021", "anio"), f.obtenerFecha("16/02/2021", "mes"),
+        f.obtenerFecha("16/02/2021", "dia")), "Nuevo tramite RN", listaCursos.get(1), listaCursos, true, (byte) 1, "Semestre 1 2022");
+
+        LevantamientoRN nuevoTramite4 = new LevantamientoRN(es2, new Date(f.obtenerFecha("13/02/2021", "anio"), f.obtenerFecha("13/02/2021", "mes"),
+        f.obtenerFecha("13/02/2021", "dia")), "Nuevo tramite RN 2", listaCursos.get(0), listaCursos, true, (byte) 2, "Semestre 2 2022");
+
+        listaTramites.add(nuevoTramite);
+        listaTramites.add(nuevoTramite2);
+        listaTramites.add(nuevoTramite3);
+        listaTramites.add(nuevoTramite4);
     }
 
     public static void main(String[] args) {
 
-        
-
+    
         cargarDatos();
 
-        funciones f = new funciones(); // Archivo con funciones.
 
         // us2.registrarUsuario();
 
@@ -643,12 +658,17 @@ public class Principal {
 
                                 System.out.println("Codigo del Curso Asociado al estado RN: ");
                                 String cod = in.nextLine();
+                                System.out.println("Numero del grado RN del curso: ");
+                                String gradoRN = in.nextLine();
+                                System.out.println("Periodo del tramite: ");
+                                String periodo = in.nextLine();
 
                                 ArrayList<Curso> cursosAMatricular = new ArrayList<Curso>();
                                 Curso c = null;
                                 while (true) {
                                     System.out.println("Codigo del Curso A Matricular: ");
                                     String codigo = in.nextLine();
+                                    
                                     boolean encontrado = false;
                                     for (Curso curso : listaCursos) {
                                         if (curso.getCodigo().equals(codigo)) {
@@ -684,7 +704,7 @@ public class Principal {
 
                                 if (estado.equals("1")) {
                                     LevantamientoRN nuevoTramite = new LevantamientoRN(e, fechaRegistro, descripcion, c,
-                                            cursosAMatricular, true);
+                                            cursosAMatricular, true, (byte) Integer.parseInt(gradoRN),periodo);
                                     listaTramites.add(nuevoTramite);
                                     f.limpiarConsola();
                                     System.out.println("El tramite se agrego exitosamente\nDatos del tramite: \n"
@@ -692,7 +712,7 @@ public class Principal {
                                     in.nextLine();
                                 } else if (estado.equals("2")) {
                                     LevantamientoRN nuevoTramite = new LevantamientoRN(e, fechaRegistro, descripcion, c,
-                                            cursosAMatricular, false);
+                                            cursosAMatricular, false, (byte) Integer.parseInt(gradoRN),periodo);
                                     listaTramites.add(nuevoTramite);
                                     f.limpiarConsola();
                                     System.out.println("El tramite se agrego exitosamente\nDatos del tramite: \n"
@@ -775,13 +795,18 @@ public class Principal {
                                 for (TramitesEstudiantiles tramite : listaTramites) {
 
                                     if(tramite.estudiante == estudiante){
-                                        System.out.println(tramite.toString());;
-                                        datosEncontrados = true;
+                                        if(tramite.getPeriodo() != null)
+                                        {
+                                            System.out.println("\nLevantamientos de RN de "+estudiante.getNombre());;
+                                            System.out.println("Periodo del Tramite: "+tramite.getPeriodo());
+                                            System.out.println("Grado RN: "+tramite.getGradoRN());
+                                            datosEncontrados = true;
+                                        }
                                     }
                                     
                                 }
                                 if(!datosEncontrados){
-                                
+                                    System.out.println("Los estudiantes del grupo no tiene tramites asociados");
                                 }
                                 System.out.println("Presiona cualquir tecla para volver al menu principal");
                                 in.nextLine();
@@ -947,14 +972,10 @@ public class Principal {
                             f.menuProfesorReportes();
                             String opcionReporte = in.nextLine();
                             if (opcionReporte.equals("1")) {
-                                System.out.println("Reporte 1\nPresiona cualquir tecla para volver al menu principal");
+                                System.out.println("\nPresiona cualquir tecla para volver al menu principal");
                                 in.nextLine();
                             }
                             else if (opcionReporte.equals("2")) {
-
-                                // Reporte de levantamiento de requisitos, basado en la selección de uno de los cursos activos a cargo, 
-                                // se listan los estudiantes a los que se les aplicara levantamiento de requisitos, detallando el 
-                                // curso requisito que se levantó y los motivos que lo justificaron.
 
                                 System.out.println("Ingrese el codigo del Curso: ");
                                 String codigo = in.nextLine();

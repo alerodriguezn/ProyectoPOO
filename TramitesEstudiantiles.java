@@ -33,7 +33,14 @@ public abstract class TramitesEstudiantiles {
    public void setDetalleDescriptivo(String detalleDescriptivo) {
        this.detalleDescriptivo = detalleDescriptivo;
    }
+   public String getPeriodo(){
+    return null;
+   }
+   public byte getGradoRN(){
+    return 0;
+   }
 }
+
 class LevantamientoRequisitos extends TramitesEstudiantiles{
 
     private Curso cursoALevantar;
@@ -144,13 +151,15 @@ class LevantamientoRN extends TramitesEstudiantiles{
     private ArrayList<Curso> cursosAMatricular;
     private boolean estado;
     private byte gradoRN;
+    private String periodo;
 
-    public LevantamientoRN(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo,Curso cursoRN, ArrayList<Curso> cursosAMatricular, boolean estado){
+    public LevantamientoRN(Estudiante estudiante, Date fechaRegistro, String detalleDescriptivo,Curso cursoRN, ArrayList<Curso> cursosAMatricular, boolean estado, byte gradoRN, String periodo){
         super(estudiante,fechaRegistro,detalleDescriptivo);
         this.cursoRN = cursoRN;
         this.cursosAMatricular = cursosAMatricular;
         this.estado = estado;
-        gradoRN = 1;
+        this.gradoRN = gradoRN;
+        this.periodo = periodo;
     }
 
     /**
@@ -199,12 +208,30 @@ class LevantamientoRN extends TramitesEstudiantiles{
         this.estado = estado;
     }
 
+    
      /**
      * Devuelve el Grado RN
      * @return retorna el grado RN
      */
+    @Override
     public byte getGradoRN(){
         return gradoRN;
+    }
+
+    /**
+     * Periodo del tramite
+     * @return el periodo del tramite
+     */
+    @Override
+    public String getPeriodo(){
+        return periodo;
+    }
+
+    /**
+     * Establece el periodo del tramite
+     */
+    public void setEstado(String periodo) {
+        this.periodo = periodo;
     }
 
     /**
