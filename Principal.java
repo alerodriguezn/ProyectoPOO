@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import javax.lang.model.util.ElementScanner6;
-import javax.sound.midi.Soundbank;
 
+
+/**
+ * Clase Principal
+ */
 public class Principal {
 
     // Listas Cursos [Presenciales] [Virtual Sincronicos] [Virtual Asincronicos]
@@ -19,13 +21,19 @@ public class Principal {
     public static Profesor profesorLogeado;
     public static Coordinador coordinadorLogeado;
 
+    /**
+     * Funcion que ordena un Arraylist
+     * @param lista lista a ordenar
+     */
     public static void sorteo(ArrayList<Grupo> lista) { 
         lista.sort((o1, o2) 
                   -> o1.getCurso().getCodigo().compareTo( 
                       o2.getCurso().getCodigo())); 
     } 
 
-    // Funcion para pruebas
+    /**
+     * Funcion que carga datos por defecto
+     */
     public static void cargarDatos() {
 
         Curso poo = new Curso("IC2022", "Programacion Orientada a Objetos", (byte) 3, (byte) 8);

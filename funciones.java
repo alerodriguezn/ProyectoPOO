@@ -300,6 +300,14 @@ public class funciones {
 
     }
 
+    /**
+     * Funcion que agrega correquisitos y requisitos a los grupos
+     * 
+     * @param fecha1 Fecha a comparar
+     * @param fecha2 Fecha a comparar
+     * @return Retorna Verdadero si la fecha 1 es mayor
+     * 
+     */
     public boolean calcularFechaMayor(Date fecha1, Date fecha2)
     {
     if (fecha1.getYear() > fecha2.getYear())

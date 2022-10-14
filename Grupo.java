@@ -56,17 +56,33 @@ public class Grupo {
 
     // Declaro los getters y setters
 
+    /**
+     * Funcion que devuelve el profesor
+     * @return Retorna el profesor a cargo
+     */
     public Profesor getProfesor() {
         return profesor;
     }
 
+    /**
+     * Establece el profesor
+     */
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
+
+    /**
+     * Funcion que devuelve el numero de grupo
+     * @return Retorna el numero de grupo
+     */
     public byte getNumeroGrupo() {
         return numeroGrupo;
     }
 
+    /**
+     * Establece el numero de grupo
+     * @param numeroGrupo numero de grupo
+     */
     public void setNumeroGrupo(byte numeroGrupo) {
         this.numeroGrupo = numeroGrupo;
     }
@@ -75,6 +91,9 @@ public class Grupo {
         return fechaInicio;
     }
 
+    /**
+     * Establece la fecha de inicio
+     */
     public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
@@ -83,42 +102,78 @@ public class Grupo {
         return fechaFinalizacion;
     }
 
+    /**
+     * Establece la fecha de finalizacion
+     */
     public void setFechaFinalizacion(Date fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
 
+    /**
+     * Devuelve el grupo
+     * @return retorna el grupo
+     */
     public Curso getCurso() {
         return curso;
     }
 
+    /**
+     * Establece el curso asociado
+     */
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
 
+    /**
+     * Devuelve el aula
+     * @return retorna el aula
+     */
     public int getAula() {
         return aula;
     }
 
+    /**
+     * Establece el aula
+     */
     public void setAula(int aula) {
         this.aula = aula;
     }
 
+    /**
+     * Devuelve el horario
+     * @return retorna el horario
+     */
     public String getHorario() {
         return horario;
     }
 
+    /**
+     * Establece el horario
+     */
     public void setHorario(String horario) {
         this.horario = horario;
     }
 
+    /**
+     * Devuelve la plataforma
+     * @return retorna la plataforma
+     */
     public String getPlataforma() {
         return plataforma;
     }
 
+    /**
+     * Establece la plataforma
+     */ 
     public void setPlataforma(String plataforma) {
         this.plataforma = plataforma;
     }
 
+    /**
+     * Valida si el profesor esta a cargo
+     * @param nombre Nombre del profesor
+     * @return retorna True si esta a cargo
+     */
     public boolean validarProfesor(String nombre){
         if(this.profesor.getNombre() == nombre){
             return true;
@@ -127,6 +182,11 @@ public class Grupo {
         }
     }
 
+    /**
+     * Valida si el estudiante esta matriculado en el curso
+     * @param carnet del estudiante
+     * @return retorna True si esta matriculado
+     */
     public boolean validarEstudiante(int carnet){
         boolean existe = false;
         for (Estudiante e : this.listaEstudiantes) {
@@ -138,21 +198,33 @@ public class Grupo {
 
     }
 
+    /**
+     * Agrega un estudiante
+     */ 
     public void agregarEstudiante(Estudiante e) {
         this.listaEstudiantes.add(e);
     }
 
+    /**
+     * Devuelve la lista de estudiantes
+     * @return retorna la lista de estudiantes
+     */
     public ArrayList<Estudiante> getEstudiantes(){
         return this.listaEstudiantes;
     }
 
+    /**
+     * Imprime toda la lista de estudiantes
+     */
     void imprimirListaEstudiantes(){
         for (Estudiante e : this.listaEstudiantes) {
             System.out.println("- Nombre: "+ e.getNombre() + "Carnet: " + e.getCarnet());
         }
     }
 
-
+    /**
+     * Imprime la lista de califaciones de los estudiantes 
+     */
     void reporteCalificaciones() {
         float sumaNota = 0f;
         float contador = 0f;
@@ -199,7 +271,10 @@ public class Grupo {
         }
     }
 
-
+    /**
+     * ToString de la clase Grupo
+     * @return Retorna un String con todos los datos del Grupo
+     */
     public String toString() {
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

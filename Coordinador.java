@@ -250,14 +250,7 @@ public class Coordinador extends Usuario{
         g.agregarEstudiante(e);
     }
 
-    /*
-     * Funcion que registra un tramite estudiantil
-     */
-    public void registrarTramiteEstudiantil()
-    {
-        System.out.println("Funcion");
-    }
-
+  
 
     
 

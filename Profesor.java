@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Describe los del profesor
+ */
 public class Profesor extends Usuario{
 
     private ArrayList<Grupo> listaGrupos;
@@ -15,25 +18,43 @@ public class Profesor extends Usuario{
 
 
     }
+
+    /**
+     * Agrega un grupo a lista de los grupos a cargo
+     * @param grupo Grupo
+     */
     public void setGrupo(Grupo grupo) {
         this.listaGrupos.add(grupo);
     }
 
 
-
+     /**
+     * Devuelve la lista de los grupos a cargo
+     * @return Retorna la lista de los grupos a cargo
+     */
     public ArrayList<Grupo> getGrupos() {
         return this.listaGrupos;
     }
 
+    /**
+     * Establece la tutoria
+     */
     public void setTutoria(int id,Estudiante e, Grupo g) {
         this.listaTutorias.add(new Tutorias(id,e, g));
     }
 
+    /**
+     * Devuelve la lista de tutorias
+     */
     public ArrayList<Tutorias> getListaTutorias() {
         return listaTutorias;
     }
 
-
+    /**
+     * Busca una tutoria por ID
+     * @param id ID
+     * @return Retorna la tutoria encontrada
+     */
     public Tutorias buscarTutoria(int id){
         for (Tutorias t : this.listaTutorias) {
             if (t.getId() == id){
