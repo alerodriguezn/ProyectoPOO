@@ -136,6 +136,43 @@ public class Principal {
 
                         if (opcion.equals("1")) {
 
+                            f.limpiarConsola();
+                            System.out.println("=== Registrando Usuario..... ===");
+                            
+                            System.out.println("Seleccione el tipo de usuario: ");
+                            System.out.println("[1] Coordinador");
+                            System.out.println("[2] Profesor");
+                            String opcionUsuario = in.nextLine();
+
+                            System.out.print("Nombre: ");
+                            String nombreC = in.nextLine();
+                            System.out.print("Telefono: ");
+                            String telefono = in.nextLine();
+                            System.out.print("Correo: ");
+                            String correo = in.nextLine();
+                            System.out.print("Usuario: ");
+                            String user = in.nextLine();
+                            System.out.print("Contraseña: ");
+                            String password = in.nextLine();
+
+                            if(opcionUsuario.equals("1"))
+                            {
+                                Coordinador nuevoCordinador = new Coordinador(nombreC, telefono, correo, user, password);
+                                listaCoordinadores.add(nuevoCordinador);
+                                f.limpiarConsola();
+                                System.out.print("Usuario creado exitosamente");
+                                System.out.print("\nPresione una tecla para volver al menu");
+                                in.nextLine();
+                            }else if (opcionUsuario.equals("2"))
+                            {
+                                Profesor nuevoProfesor = new Profesor(nombreC, telefono, correo, user, password);
+                                listaProfesores.add(nuevoProfesor);
+                                f.limpiarConsola();
+                                System.out.print("Usuario creado exitosamente");
+                                System.out.print("\nPresione una tecla para volver al menu");
+                                in.nextLine();
+                            }
+
                         } else if (opcion.equals("2")) {
                             f.limpiarConsola();
                             System.out.println("=== Registrando Estudiante..... ===");
